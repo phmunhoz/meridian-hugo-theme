@@ -1,0 +1,140 @@
+{{ define "main" }}
+
+{{/* ── HEADER ── */}}
+<div class="post-header">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="{{ .Site.Params.blogURL | default "/blog/" }}">Blog</a>
+      {{ with .Params.categories }}
+      <span class="breadcrumb__sep">/</span>
+      <a href="{{ ($.Site.Params.blogURL | default "/blog/") | relURL }}categories/{{ index . 0 | urlize }}/">{{ index . 0 }}</a>
+      {{ end }}
+      <span class="breadcrumb__sep">/</span>
+      <span>{{ .Title | truncate 40 }}</span>
+    </nav>
+
+    <div class="post-meta">
+      {{ with .Params.categories }}
+      <span class="cat-label post-meta__cat">{{ index . 0 }}</span>
+      <span class="post-meta__dot">·</span>
+      {{ end }}
+      <time class="post-meta__date" datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "2 de January de 2006" }}
+      </time>
+      <span class="post-meta__dot">·</span>
+      <span class="post-meta__time">{{ .ReadingTime }} {{ i18n "blog_min_read" }}</span>
+    </div>
+
+    <h1 class="post-header__title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="post-header__lead">{{ . }}</p>{{ end }}
+
+    <div class="post-author">
+      <div class="post-author__avatar">PH</div>
+      <div>
+        <div class="post-author__name">{{ .Site.Params.author }}</div>
+        <div class="post-author__role">{{ .Site.Params.authorRole | default (i18n "blog_author_role") }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* ── COVER IMAGE ── */}}
+{{ with .Params.image }}
+<div class="post-cover">
+  <div class="container">
+    <div class="post-cover__frame">
+      <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CONTENT + SIDEBAR ── */}}
+<div class="post-layout">
+  <div class="container">
+    <div class="post-layout__inner">
+
+      {{/* ARTICLE */}}
+      <article class="post-content" id="post-content">
+        {{ .Content }}
+
+        {{/* TAGS */}}
+        {{ with .GetTerms "tags" }}
+        <div class="post-tags">
+          {{ range . }}
+          <a href="{{ .RelPermalink }}" class="tag">{{ .LinkTitle }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+
+        {{/* SHARE */}}
+        <div class="post-share">
+          <span class="post-share__label">{{ i18n "blog_share_label" }}</span>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">LinkedIn</a>
+          <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Twitter / X</a>
+        </div>
+      </article>
+
+      {{/* SIDEBAR */}}
+      <aside class="post-sidebar">
+
+        {{/* TOC */}}
+        {{ if .TableOfContents }}
+        <div class="sidebar-toc">
+          <div class="sidebar-toc__label">{{ i18n "blog_toc_label" }}</div>
+          {{ .TableOfContents }}
+        </div>
+        {{ end }}
+
+        {{/* CONTEXTUAL CTA */}}
+        <div class="sidebar-cta">
+          <div class="sidebar-cta__label">{{ i18n "blog_sidebar_cta_question" }}</div>
+          <h3>{{ .Site.Params.blog_sidebar_cta_title | default (i18n "blog_sidebar_cta_title") }}</h3>
+          <p>{{ .Site.Params.blog_sidebar_cta_body | default (i18n "blog_sidebar_cta_body") }}</p>
+          <a href="{{ .Site.Params.blog_sidebar_cta_url | default "/shopify/" }}">{{ i18n "blog_sidebar_cta_link" }}</a>
+        </div>
+
+        {{/* RELATED POSTS */}}
+        {{ $related := .Site.RegularPages.Related . | first 3 }}
+        {{ with $related }}
+        <div class="sidebar-related">
+          <div class="sidebar-related__label">{{ i18n "blog_related_label" }}</div>
+          {{ range . }}
+          <a href="{{ .RelPermalink }}" class="related-item">
+            <div class="cat-label related-item__cat">
+              {{ with .Params.categories }}{{ index . 0 }}{{ end }}
+            </div>
+            <div class="related-item__title">{{ .Title }}</div>
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+{{/* ── PREV / NEXT ── */}}
+<div class="post-nav">
+  <div class="container">
+    <div class="post-nav__inner">
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="post-nav__item">
+        <div class="post-nav__direction">{{ i18n "blog_prev" }}</div>
+        <div class="post-nav__title">{{ .Title }}</div>
+      </a>
+      {{ else }}<div></div>{{ end }}
+
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="post-nav__item post-nav__item--next">
+        <div class="post-nav__direction">{{ i18n "blog_post_next" }}</div>
+        <div class="post-nav__title">{{ .Title }}</div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}

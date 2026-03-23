@@ -1,0 +1,110 @@
+{{ define "main" }}
+{{ $plat := .Params.platform | default "Plataforma" }}
+{{ $eMin := .Params.savings_min | default "30" }}
+{{ $eMax := .Params.savings_max | default "70" }}
+
+{{/* ── HERO ── */}}
+<div class="page-hero section--dark">
+  <div class="container">
+    <nav class="breadcrumb breadcrumb--dark anim-1">
+      <a href="{{ .Site.Params.servicesURL | default "/shopify/" }}">Shopify</a>
+      <span class="breadcrumb__sep">/</span>
+      {{ i18n "service_migration_tag" }} · {{ $plat }}
+    </nav>
+    <p class="page-label page-label--accent anim-2">{{ i18n "service_migration_tag" }}</p>
+    <h1 class="anim-3" style="color:white;">{{ $plat }} para<br><em>Shopify.</em></h1>
+    <p class="service-hero__sub anim-4">{{ .Description }}</p>
+    <a href="/contact/" class="btn btn-green-accent anim-5">{{ i18n "btn_migrate" }}</a>
+
+    <div class="metric-strip metric-strip--dark" style="margin-top:48px;">
+      <div class="metric">
+        <div class="metric__number metric__number--accent">{{ $eMin }}–{{ $eMax }}%</div>
+        <div class="metric__label metric__label--dark">de economia anual<br>nos custos de platform</div>
+      </div>
+      <div class="metric">
+        <div class="metric__number metric__number--accent">0h</div>
+        <div class="metric__label metric__label--dark">{{ i18n "service_downtime_label" }}</div>
+      </div>
+      <div class="metric">
+        <div class="metric__number metric__number--white">+20</div>
+        <div class="metric__label metric__label--dark">{{ .Site.Params.years_experience_label | default "" }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* ── PROBLEMS / CONTENT ── */}}
+<div class="section">
+  <div class="container">
+    <span class="section-label">O problema</span>
+    <h2>{{ .Site.Params.migration_problem_title | default "" | markdownify }}</h2>
+    <div class="prose section__intro" style="max-width:100%;margin-top:0;">
+      {{ .Content }}
+    </div>
+  </div>
+</div>
+
+<hr class="divider container">
+
+{{/* ── PROCESS ── */}}
+<div class="section--off">
+  <div class="container">
+    <div class="section">
+      <span class="section-label">{{ i18n "eyebrow_how_it_works" }}</span>
+      <h2>{{ i18n "service_process_title" }}</h2>
+      <p class="section__intro">{{ i18n "service_process_intro" }}</p>
+
+      <div class="process-list" style="margin-top:40px;">
+        <div class="process-item">
+          <div class="process-item__num">ETAPA 01</div>
+          <div class="process-item__content">
+            <h3>{{ i18n "service_step_1_title" }}</h3>
+            <p>{{ .Site.Params.migration_step_1_body | default "" }}</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-item__num">ETAPA 02</div>
+          <div class="process-item__content">
+            <h3>{{ i18n "service_step_2_title" }}</h3>
+            <p>{{ .Site.Params.migration_step_2_body | default "" }}</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-item__num">ETAPA 03</div>
+          <div class="process-item__content">
+            <h3>{{ i18n "service_step_3_title" }}</h3>
+            <p>{{ .Site.Params.migration_step_3_body | default "" }}</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-item__num">ETAPA 04</div>
+          <div class="process-item__content">
+            <h3>{{ i18n "service_step_4_title" }}</h3>
+            <p>{{ .Site.Params.migration_step_4_body | default "" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* ── CASES ── */}}
+{{ partial "cases-block.html" . }}
+
+{{/* ── CTA ── */}}
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ i18n "service_cta_title" }}</h2>
+        <p class="cta-section__desc">{{ i18n "service_cta_body" }}</p>
+      </div>
+      <div class="cta-section__actions">
+        <a href="/contact/" class="btn btn-white">{{ i18n "btn_contact_arrow" }}</a>
+        {{ with .Site.Params.reply_note }}<p class="cta-section__note">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

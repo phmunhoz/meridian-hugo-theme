@@ -1,0 +1,593 @@
+baseURL = "https://example.com/"
+languageCode = "en"
+title = "Jane Doe — Technology & Digital Strategy"
+theme = "meridian"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  # ── Colors (all optional — defaults match Meridian's design system) ──
+  # colorBlack        = "#111110"
+  # colorWhite        = "#f7f6f3"
+  # colorOffWhite     = "#efede8"
+  # colorGray         = "#737370"
+  # colorGrayLight    = "#dddbd5"
+  # colorAccent       = "#2a5c45"
+  # colorAccentMid    = "#3d7a5e"
+  # colorAccentBright = "#52b788"
+  # colorAccentLight  = "#e8f0ec"
+  # colorText         = "#1c1c1a"
+
+  # ── Identity ─────────────────────────────────────────────────────
+  description  = "I help companies build, structure and scale their digital operations — from strategy to software development and products."
+  author       = "Jane Doe"
+  location     = "San Francisco, CA — United States"
+  email        = "hello@example.com"
+  whatsapp     = "https://wa.me/1..."
+  linkedin     = "https://linkedin.com/in/janedoe"
+  available    = true
+  contactURL   = "/contact/"
+  contactLabel = "Get in touch"
+  servicesURL  = "/services/"
+  servicesLabel = "Services"
+  consultingURL = "/consulting/"
+  casesURL     = "/cases/"
+  readMoreLabel = "Learn more →"
+  viewAllCases = "View all →"
+  casesLabel   = "Cases"
+  productsLabel = "Products"
+  selectedWorkLabel = "Selected work"
+  featuredProductLabel = "Most mature"
+  currentTractionLabel = "Current traction"
+  whyMeTitle   = "What sets me apart"
+
+  # ── Nav ───────────────────────────────────────────────────────────
+  partnerBarText = "**Certified platform partner:** direct platform support, exclusive development resources and co-marketing opportunities."
+  partnerBarLinkURL   = "/contact/"
+  partnerBarLinkLabel = "Talk about your project →"
+
+  # ── Home hero ────────────────────────────────────────────────────
+  homeHeroLabel    = "Independent Consultant"
+  homeHeroTitle    = "From problem<br/>to the <em>solution</em><br/>that works."
+  homeHeroSubtitle = "I help companies build, structure and scale their digital operations — from strategy to development. Specialized in e-commerce and technology for 10+ years."
+  homeHeroCTA      = "View services →"
+  homeHeroCTAURL   = "/services/"
+  homeHeroCTA2     = "About me"
+  homeHeroCTA2URL  = "/about/"
+
+  [[params.homeMetrics]]
+    number = "70%"
+    label  = "typical annual savings<br/>on migrations"
+    accent = true
+  [[params.homeMetrics]]
+    number = "3"
+    label  = "own digital<br/>products active"
+  [[params.homeMetrics]]
+    number = "10+"
+    label  = "years in e-commerce<br/>and technology"
+
+  # ── Home services ─────────────────────────────────────────────────
+  homeServicesSectionLabel = "Services"
+  homeServicesTitle  = "Three ways<br/>to work together."
+  homeServicesIntro  = "Each project starts from a different place. What doesn't change is the focus: lower costs, more autonomy, and an operation your team can evolve."
+  homeServicesCTA    = "View all services →"
+  homeServicesURL    = "/services/"
+
+  [[params.homeServices]]
+    tag    = "Migration"
+    title  = "Legacy Platform → Modern Stack"
+    desc   = "For operations that have outgrown their platform and are paying more than they should — in cost, time, and team dependency."
+    saving = "Typical savings: 30–70% per year"
+    url    = "/services/platform-migration/"
+  [[params.homeServices]]
+    tag    = "Evolution"
+    title  = "Maintenance & Evolution"
+    desc   = "For teams already on the right platform who want to go further — performance, integrations, analytics stack, or enterprise tier growth."
+    saving = "Ongoing engagement"
+    url    = "/services/maintenance-evolution/"
+
+  # ── Home consulting ───────────────────────────────────────────────
+  homeConsultingSectionLabel = "Consulting"
+  homeConsultingTitle  = "E-commerce, Martech<br/>and Technology."
+  homeConsultingParagraphs = [
+    "I work with companies that need strategic clarity and technical direction — not just another opinion, but someone who understands the business problem and knows how to solve it in practice.",
+    "I move between the strategic and the operational. From diagnosis to execution.",
+  ]
+  homeConsultingChecks = [
+    "E-commerce operations that need to scale more efficiently",
+    "Companies with bottlenecks between technology and operations",
+    "Businesses that need technology stack direction",
+    "Operations that have grown and need structure",
+    "Demands that off-the-shelf solutions don't solve well",
+  ]
+
+  [[params.differentiators]]
+    num   = "01"
+    label = "Business"
+    title = "I understand the problem before proposing anything"
+    desc  = "Operating context, business model and real objectives first. Technology follows, it doesn't lead."
+  [[params.differentiators]]
+    num   = "02"
+    label = "Technology"
+    title = "I define architecture with real technical vision"
+    desc  = "Stack, integrations and architecture with judgment — not just tool recommendations."
+  [[params.differentiators]]
+    num   = "03"
+    label = "Execution"
+    title = "I don't stop at strategy"
+    desc  = "I participate in building and follow implementation. The plan serves the result, not the other way around."
+
+  # ── Home projects ─────────────────────────────────────────────────
+  homeProjectsSectionLabel = "Projects & Products"
+  homeProjectsTitle  = "Development and<br/>own products."
+  homeProjectsIntro  = "Beyond consulting, I build custom systems for companies that need solutions that don't exist off the shelf — and own digital products."
+
+  [params.homeVentures]
+    tag   = "Custom development"
+    title = "Custom Projects"
+    desc  = "Personalized systems for established companies that need solutions that off-the-shelf tools can't deliver. From discovery to product in production."
+    url   = "/cases/legacy-to-modern-migration/"
+    cta   = "See case →"
+
+  # ── Home about ────────────────────────────────────────────────────
+  homeAboutSectionLabel = "About"
+  homeAboutTitle = "Technology and business.<br/>In theory and in practice."
+  homeAboutParagraphs = [
+    "10+ years working at the intersection of technology, e-commerce and digital marketing. I've worked at companies across retail, media and technology sectors.",
+    "Today I work with companies that need someone who understands both the business problem and the technical solution. Not just a strategist, not just a developer — both.",
+  ]
+  homeAboutURL = "/about/"
+  homeAboutCTA = "Full story →"
+
+  skills = ["Shopify", "E-commerce", "Martech", "Analytics", "n8n", "Automation", "SEO", "CRM"]
+
+  # ── Home blog ─────────────────────────────────────────────────────
+  homeBlogSectionLabel = "Blog"
+  homeBlogTitle  = "Technical content<br/>without fluff."
+  homeBlogIntro  = "Articles about e-commerce, automation, and technology — focused on what's actually useful in practice."
+  homeBlogURL    = "/blog/"
+  homeBlogCTA    = "All posts →"
+
+  # ── Home CTA ──────────────────────────────────────────────────────
+  homeCTATitle = "Have a project in mind?"
+  homeCTADesc  = "If you're thinking about migrating platforms, need help structuring your digital operation, or have a development project — let's talk."
+  homeCTABtn   = "Get in touch →"
+  homeCTANote  = "I respond within 24h. No generic forms — it's a real conversation."
+
+  # ── About page ────────────────────────────────────────────────────
+  aboutPageLabel       = "About"
+  aboutHeroTitle       = "Technology and business.<br/>In practice."
+  aboutLocationLabel   = "Based in"
+  aboutTimelineLabel   = "Timeline"
+  aboutSkillsLabel     = "Specialties"
+  aboutEducationLabel  = "Education"
+  aboutRecognitionLabel = "Recognition"
+  aboutAvailabilityLabel = "Availability"
+  aboutAvailabilityText  = "Open to new projects"
+  aboutCasesLabel      = "Cases"
+  aboutProductsLabel   = "Products"
+  aboutDifferentiatorsLabel = "How I work"
+  aboutCTATitle = "Have a project that needs someone who understands and delivers?"
+  aboutCTABtn   = "View services →"
+  aboutEducation = "Business Administration — State University<br/>Marketing — Design College"
+  aboutRecognition = "1st place at Industry Analytics Challenge (2021)"
+
+  [[params.timeline]]
+    years = "2022 – present"
+    desc  = "Independent consultant · Platform Partner"
+  [[params.timeline]]
+    years = "2019 – 2022"
+    desc  = "E-commerce Manager — RetailCo"
+  [[params.timeline]]
+    years = "2015 – 2019"
+    desc  = "Digital Marketing Lead — MediaGroup"
+
+  [[params.testimonials]]
+    quote = "\"Jane brings a rare combination of business acumen and technical depth. She understands what matters for the business and translates that into solutions that actually work.\""
+    name  = "Alex Rivera"
+    role  = "Head of E-commerce · FashionBrand"
+  [[params.testimonials]]
+    quote = "\"Working with Jane changed how our team thinks about digital operations. She doesn't just advise — she builds alongside you and stays until it works.\""
+    name  = "Sam Chen"
+    role  = "CTO · RetailStartup"
+
+  testimonialsLabel = "What people say"
+
+  # ── Consulting page ───────────────────────────────────────────────
+  consultingPageLabel   = "Consulting"
+  consultingHeroTitle   = "Clarity to decide.<br/>Skill to execute."
+  consultingHeroCTA     = "Talk about your project →"
+  consultingHeroCTA2    = "How I work"
+  consultingChecksLabel = "I typically work in scenarios like"
+  consultingChecks = [
+    "E-commerce operations that need to scale more efficiently",
+    "Companies with bottlenecks between technology and operations",
+    "Businesses that need technology stack direction",
+    "Operations that have grown and need structure",
+    "Demands that off-the-shelf solutions don't solve well",
+  ]
+  consultingAreasSectionLabel = "Areas of expertise"
+  consultingAreasTitle  = "Three pillars.<br/>One integrated vision."
+  consultingAreasIntro  = "E-commerce, martech and technology are rarely separate problems. I typically work across two or all three — because that's where the real problem usually lives."
+
+  [[params.consultingPillars]]
+    num   = "01"
+    title = "E-commerce"
+    desc  = "I help digital operations improve performance, structure and growth capacity — from business model to platform selection."
+    items = ["Operations audit and diagnosis", "Store performance and conversion", "Platform migration and selection", "E-commerce operations and processes"]
+  [[params.consultingPillars]]
+    num   = "02"
+    title = "Martech"
+    desc  = "Marketing technology stack — from data collection to effective use in campaigns, CRM and automations."
+    items = ["Stack definition and organization", "Analytics and tracking (GA4, GTM)", "CRM and marketing automation", "Email marketing and segmentation"]
+  [[params.consultingPillars]]
+    num   = "03"
+    title = "Technology"
+    desc  = "System architecture, tool selection and integrations — with a business lens to avoid building technology for its own sake."
+    items = ["System architecture and integrations", "Automations with n8n and Make", "ERP, OMS and management tools", "Process and workflow optimization"]
+
+  consultingProcessSectionLabel = "How I work"
+
+  [[params.consultingProcess]]
+    num   = "01"
+    title = "Understand the problem"
+    desc  = "Before any recommendation, I understand the operation, business model, objectives and real constraints."
+  [[params.consultingProcess]]
+    num   = "02"
+    title = "Map what's at stake"
+    desc  = "Business, marketing and technology diagnosis — looking for where the real problem actually is."
+  [[params.consultingProcess]]
+    num   = "03"
+    title = "Propose the path"
+    desc  = "Clear and prioritized direction — what to do first, why, and what to expect. No 50-slide deck that sits in a drawer."
+  [[params.consultingProcess]]
+    num   = "04"
+    title = "Follow execution"
+    desc  = "I don't just stay at the strategy level. I participate in building, follow implementation and adjust along the way."
+
+  consultingServicesBridgeTitle  = "Consulting that leads to platform migration"
+  consultingServicesBridgeDesc   = "Many clients come looking for e-commerce and martech help — and as the work progresses it becomes clear that the platform is limiting growth. When that happens, migration becomes the natural next step."
+  consultingServicesBridgeChecks = [
+    "Starts with operations and martech consulting",
+    "Diagnosis surfaces platform limitations",
+    "Migration as a natural evolution",
+    "Continued engagement post-migration",
+  ]
+  consultingServicesBridgeCTA = "View services →"
+  consultingCTATitle = "Have a problem that needs clarity before a solution?"
+  consultingCTADesc  = "We start with a conversation. You tell me what's happening — I'll tell you, honestly, if and how I can help."
+  consultingCTANote  = "I respond within 24h. No generic forms."
+
+  # ── Services page ─────────────────────────────────────────────────
+  servicesPageLabel    = "Services"
+  servicesHeroTitle    = "Services that<br/>deliver results."
+  servicesHeroSubtitle = "Platform migration, implementation and ongoing evolution. With 10+ years of experience and a focus on reducing costs and increasing your team's autonomy."
+  servicesHeroCTA      = "Talk about your project →"
+  servicesHeroCTA2     = "How it works"
+
+  [[params.servicesMetrics]]
+    number = "70%"
+    label  = "typical annual savings<br/>on migrations"
+    accent = true
+  [[params.servicesMetrics]]
+    number = "0h"
+    label  = "downtime during<br/>platform cutover"
+  [[params.servicesMetrics]]
+    number = "Partner"
+    label  = "certified platform<br/>partner"
+
+  servicesWhatISectionLabel = "What I do"
+  servicesWhatITitle  = "Ways to work together."
+  comparisonSectionLabel = "Why migrate"
+  comparisonTitle  = "The real cost of<br/>staying where you are."
+  comparisonBeforeTitle = "Legacy platform"
+  comparisonAfterTitle  = "Modern stack"
+  comparisonBefore = [
+    "High license, infrastructure and maintenance costs",
+    "Every change requires an agency or IT team",
+    "Slow time-to-market: from idea to execution, weeks",
+    "Expensive and risky updates",
+    "Limited or expensive app ecosystem",
+  ]
+  comparisonAfter = [
+    "Predictable cost — no infrastructure surprises",
+    "Business team operates without depending on IT",
+    "Changes in hours, not weeks",
+    "Managed platform — automatic updates",
+    "8,000+ native apps with built-in integrations",
+  ]
+
+  servicesProcessSectionLabel = "How it works"
+  servicesProcessTitle  = "From discovery to go-live."
+  servicesProcessIntro  = "Every project starts with understanding the business — not the technology. The process is managed end to end."
+
+  [[params.servicesProcess]]
+    num   = "STEP 01"
+    title = "Discovery and diagnosis"
+    desc  = "Understanding the current operation, mapping integrations, risks and opportunities."
+  [[params.servicesProcess]]
+    num   = "STEP 02"
+    title = "Planning and architecture"
+    desc  = "Defining the new stack, app selection, required integrations, timeline and data migration strategy."
+  [[params.servicesProcess]]
+    num   = "STEP 03"
+    title = "Migration and implementation"
+    desc  = "Building the new setup, migrating data, configuring integrations and testing. Current operation stays live."
+  [[params.servicesProcess]]
+    num   = "STEP 04"
+    title = "Go-live and stabilization"
+    desc  = "Controlled cutover with close monitoring. The project doesn't end at go-live — available for adjustments and evolution."
+
+  faqSectionLabel = "FAQ"
+  faqTitle = "Questions people ask."
+
+  [[params.faq]]
+    q = "How long does a migration take?"
+    a = "It depends on the complexity of the operation. Mid-size projects typically take 6 to 12 weeks. Larger projects with multiple integrations can take 3 to 6 months. The initial discovery defines this more precisely."
+  [[params.faq]]
+    q = "Does the store go down during migration?"
+    a = "No. The current operation continues running normally throughout the project. The cutover is planned in a controlled window — typically a few hours during low traffic."
+  [[params.faq]]
+    q = "Is order history and customer data migrated?"
+    a = "Yes, for the most part. Products, categories, customers and order history are migrated in most projects. Data specific to legacy platforms is evaluated case by case."
+  [[params.faq]]
+    q = "Is SEO affected by the migration?"
+    a = "When well planned, migration doesn't cause meaningful organic traffic loss. This includes URL mapping, redirects, metadata migration and post-go-live monitoring. SEO is treated as a requirement, not an optional item."
+
+  servicesCTATitle = "Ready to move forward or want to understand better?"
+  servicesCTADesc  = "We start with a no-commitment conversation about your current operation. If it makes sense to proceed, I'll propose a structured discovery."
+  servicesCTANote  = "I respond within 24h. No generic forms — it's a real conversation about your project."
+  casesSectionLabel = "Cases"
+  casesSectionTitle = "Projects that happened."
+
+  # ── Maintenance page ──────────────────────────────────────────────
+  maintenancePageLabel  = "For teams already on the platform"
+  maintenanceHeroTitle  = "Your platform<br/>can go further."
+  maintenanceHeroCTA2   = "What I do"
+  maintenanceAreasLabel = "Areas of focus"
+  maintenanceAreas = [
+    "Technical performance",
+    "Integrations and automations",
+    "Martech and analytics stack",
+    "App optimization and cost reduction",
+    "Growth to enterprise tier",
+    "SEO and conversion optimization",
+  ]
+  maintenanceWhatISectionLabel = "What I do"
+  maintenanceWhatITitle = "Continuous evolution,<br/>not one-off deliveries."
+  maintenanceModelSectionLabel = "How I work"
+  maintenanceModelTitle = "Ongoing partnership,<br/>not reactive support."
+  maintenanceModelParagraphs = [
+    "I don't work as reactive support — where you open a ticket and wait. The idea is a close working relationship where I understand the business deeply enough to anticipate problems and opportunities.",
+    "Most clients who start with maintenance and evolution naturally expand the engagement — new integrations, feature development, and often a move to the enterprise tier when volume justifies it.",
+  ]
+  maintenanceProcessTitle = "How the engagement works in practice"
+
+  [[params.maintenanceFeatures]]
+    tag   = "Performance"
+    title = "Technical performance and speed"
+    desc  = "Slow platforms lose conversions. Theme, script, image and heavy app optimization — with direct focus on Core Web Vitals."
+    items = ["Performance audit", "Theme and script optimization", "App review and cost reduction"]
+  [[params.maintenanceFeatures]]
+    tag   = "Integrations"
+    title = "Integrations and automations"
+    desc  = "ERP, logistics, marketing, support — every integration that works well is a manual task eliminated."
+    items = ["ERP and inventory management", "Automations with n8n and Make", "Logistics and carriers"]
+  [[params.maintenanceFeatures]]
+    tag   = "Martech & data"
+    title = "Martech and analytics stack"
+    desc  = "GA4, GTM, Meta Pixel, CRM — the right data setup is what makes marketing decisions reliable."
+    items = ["GA4 and GTM configuration", "Conversion and event tracking", "CRM and email integration"]
+  [[params.maintenanceFeatures]]
+    tag   = "SEO & conversion"
+    title = "SEO and conversion optimization"
+    desc  = "URL structure, metadata, speed, rich snippets — everything that impacts organic traffic and conversion rate."
+    items = ["On-page SEO audit and structure", "Checkout and UX optimization", "Monitoring and continuous evolution"]
+
+  [[params.maintenanceProcess]]
+    num   = "01"
+    title = "Initial diagnosis"
+    desc  = "Understanding where the platform stands today — what's working, what's blocking, and what the business priorities are."
+  [[params.maintenanceProcess]]
+    num   = "02"
+    title = "Evolution roadmap"
+    desc  = "We prioritize together — what to tackle first based on business impact, not what's technically easiest."
+  [[params.maintenanceProcess]]
+    num   = "03"
+    title = "Execution and follow-up"
+    desc  = "Implementation with close result monitoring. What doesn't work gets adjusted — without bureaucracy."
+  [[params.maintenanceProcess]]
+    num   = "04"
+    title = "Continuous evolution"
+    desc  = "The roadmap is reviewed regularly. The business changes, priorities change — the engagement follows."
+
+  maintenancePlusSectionLabel = "Next level"
+  maintenancePlusTitle = "When to upgrade<br/>to the enterprise tier."
+  maintenancePlusIntro = "The enterprise tier isn't just a more expensive version — it's a different platform for operations that have grown beyond what the standard tier handles efficiently."
+  maintenancePlusCTA   = "Talk about upgrading →"
+
+  [[params.maintenancePlusFeatures]]
+    icon  = "⚡"
+    title = "Advanced automations with Flow"
+    desc  = "Code-free automated workflows for complex operations — promotions, VIP customer management, inventory control."
+  [[params.maintenancePlusFeatures]]
+    icon  = "🏪"
+    title = "Multiple stores and markets"
+    desc  = "Centralized management of multiple stores, currencies and languages for B2B operations or international expansion."
+  [[params.maintenancePlusFeatures]]
+    icon  = "🔧"
+    title = "Customizable checkout"
+    desc  = "Deep checkout customization — fields, business logic and integration with proprietary systems."
+  [[params.maintenancePlusFeatures]]
+    icon  = "📞"
+    title = "Dedicated support"
+    desc  = "Dedicated Merchant Success Manager and 24/7 priority support directly from the platform."
+
+  maintenanceCTATitle = "Your platform can deliver more."
+  maintenanceCTADesc  = "We start with a conversation about where your platform stands today. No paid diagnosis or immediate commitment."
+  maintenanceCTANote  = "I respond within 24h. No generic forms."
+
+  # ── Projects page ─────────────────────────────────────────────────
+  projectsPageLabel  = "Projects"
+  projectsHeroTitle  = "From zero to the product<br/>that stands on its own."
+  venturesSectionLabel = "Custom development"
+  venturesTitle = "Custom Projects."
+  venturesParagraphs = [
+    "Not a software factory. The model is different: we understand the business problem in depth, define the right architecture, put together a lean squad and build from zero to one.",
+    "Projects are structured as continuous solutions — closer to a SaaS than a one-off delivery. We don't deliver and disappear: the solution evolves alongside the client's business.",
+  ]
+  venturesProcessLabel = "Engagement model"
+
+  [[params.venturesProcess]]
+    num   = "Discovery"
+    title = "Problem understanding"
+    desc  = "Deep dive into the client's operation to understand the real problem — not just the stated one."
+  [[params.venturesProcess]]
+    num   = "Architecture"
+    title = "Solution definition"
+    desc  = "Technology selection, system architecture and development scope definition."
+  [[params.venturesProcess]]
+    num   = "Build"
+    title = "Development with a tailored squad"
+    desc  = "Right team for the project. Iterative development with validations throughout."
+  [[params.venturesProcess]]
+    num   = "Evolution"
+    title = "Product in production, continuously evolving"
+    desc  = "The product goes live and continues to be developed based on real usage."
+
+  [[params.venturesCards]]
+    tag   = "Reference · Industry"
+    title = "Enterprise Client"
+    desc  = "Custom system development for a major industrial company. From discovery to product in production."
+    badge = "Active project"
+    url   = "/cases/legacy-to-modern-migration/"
+    cta   = "See case →"
+  [[params.venturesCards]]
+    muted = true
+    tag   = "Client profile"
+    title = "Who this is for"
+    desc  = "Established companies with specific demands that off-the-shelf solutions don't solve. High-ticket projects with a need for continuous evolution."
+    badge = "Accepting new projects"
+
+  ownProductsLabel = "Own products"
+  ownProductsTitle = "Digital assets with<br/>scale potential."
+  projectsPhilosophyLabel = "How I think about projects"
+  projectsPhilosophyTitle = "Projects that don't<br/>end at delivery."
+
+  [[params.projectsPhilosophy]]
+    num   = "01"
+    title = "Real problem before solution"
+    desc  = "Every project starts by deeply understanding the problem. The solution follows the problem — never the other way around."
+  [[params.projectsPhilosophy]]
+    num   = "02"
+    title = "Lean squads, controlled deliveries"
+    desc  = "A small squad with the right people delivers more, makes fewer mistakes and corrects faster."
+  [[params.projectsPhilosophy]]
+    num   = "03"
+    title = "Recurring revenue, not one-off projects"
+    desc  = "Every project I build aims to generate continuous value. A one-off delivery rarely solves the problem for real."
+
+  projectsCTATitle = "Have a problem that needs a solution that doesn't exist yet?"
+  projectsCTABtn2  = "View consulting"
+
+  # ── Contact page ──────────────────────────────────────────────────
+  contactPageLabel    = "Contact"
+  contactHeroTitle    = "Let's talk."
+  availabilityLabel   = "Availability"
+  contactAvailabilityDesc = "E-commerce, martech and technology consulting. Platform migrations. Custom development when the profile fits."
+  emailLabel          = "Email"
+  emailResponseTime   = "Responds within 24h"
+  whatsappLabel       = "Send a WhatsApp message"
+  whatsappSub         = "For urgent matters"
+  linkedinSub         = "Connect there too"
+  contactProjectTypesLabel = "Project types"
+  contactProjectTypes = [
+    "Platform migration",
+    "Platform maintenance and evolution",
+    "E-commerce and martech consulting",
+    "Custom system development",
+    "Digital operations diagnosis and structure",
+  ]
+  contactFormTitle    = "Send a message"
+  contactFormSubtitle = "Tell me a bit about your project or need — the more context, the better I can assess how I can help."
+  contactFieldName    = "Name"
+  contactFieldNamePlaceholder = "Your name"
+  contactFieldCompany = "Company"
+  contactFieldCompanyPlaceholder = "Where you work (optional)"
+  contactFieldEmail   = "Email"
+  contactFieldEmailPlaceholder = "your@email.com"
+  contactFieldSubject = "Subject"
+  contactFieldSubjectPlaceholder = "What would you like to talk about?"
+  contactFieldMessage = "Message"
+  contactFieldMessagePlaceholder = "Tell me about your current situation, what you're looking for and any relevant context..."
+  contactSubmitBtn    = "Send message →"
+  contactFormNote     = "I respond within 24h. No spam, no third-party sharing."
+  contactSuccessTitle = "Message sent."
+  contactSuccessDesc  = "I received your message and will get back to you within 24h."
+
+  [[params.contactFormSelectOptions]]
+    value = "migration"
+    label = "Platform migration"
+  [[params.contactFormSelectOptions]]
+    value = "maintenance"
+    label = "Maintenance & evolution"
+  [[params.contactFormSelectOptions]]
+    value = "consulting"
+    label = "E-commerce / martech consulting"
+  [[params.contactFormSelectOptions]]
+    value = "development"
+    label = "Custom system development"
+  [[params.contactFormSelectOptions]]
+    value = "other"
+    label = "Other"
+
+  [[params.contactStrip]]
+    label = "How it works"
+    text  = "We start with a conversation. You tell me what's happening — I'll tell you, honestly, **if and how I can help.**"
+  [[params.contactStrip]]
+    label = "No upfront commitment"
+    text  = "The first conversation has no cost or commitment. Only after understanding the problem do I propose **how the engagement could work.**"
+  [[params.contactStrip]]
+    label = "Based in"
+    text  = "San Francisco, CA. I work with **clients anywhere,** with online meetings and on-site presence when needed."
+
+  # ── Newsletter ────────────────────────────────────────────────────
+  newsletterTitle       = "Newsletter"
+  newsletterDesc        = "No forced frequency — I publish when I have something useful to say. No spam, no sponsored content."
+  newsletterPlaceholder = "your@email.com"
+  newsletterBtn         = "Subscribe →"
+  newsletterNote        = "Cancel anytime."
+
+[taxonomies]
+  category = "categories"
+  tag      = "tags"
+
+[menu]
+  [[menu.main]]
+    name       = "Services"
+    url        = "/services/"
+    weight     = 1
+    [menu.main.params]
+      highlight = true
+  [[menu.main]]
+    name   = "Consulting"
+    url    = "/consulting/"
+    weight = 2
+  [[menu.main]]
+    name   = "Projects"
+    url    = "/projects/"
+    weight = 3
+  [[menu.main]]
+    name   = "Blog"
+    url    = "/blog/"
+    weight = 4
+  [[menu.main]]
+    name   = "About"
+    url    = "/about/"
+    weight = 5
+
+[pagination]
+  pagerSize = 9

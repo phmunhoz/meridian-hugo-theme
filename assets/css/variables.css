@@ -1,0 +1,12 @@
+:root {
+  --black:        {{ .Site.Params.colorBlack       | default "#111110" }};
+  --white:        {{ .Site.Params.colorWhite       | default "#f7f6f3" }};
+  --off-white:    {{ .Site.Params.colorOffWhite    | default "#efede8" }};
+  --gray:         {{ .Site.Params.colorGray        | default "#737370" }};
+  --gray-light:   {{ .Site.Params.colorGrayLight   | default "#dddbd5" }};
+  --accent:       {{ .Site.Params.colorAccent      | default "#2a5c45" }};
+  --accent-mid:   {{ .Site.Params.colorAccentMid   | default "#3d7a5e" }};
+  --accent-bright:{{ .Site.Params.colorAccentBright| default "#52b788" }};
+  --accent-light: {{ .Site.Params.colorAccentLight | default "#e8f0ec" }};
+  --text:         {{ .Site.Params.colorText        | default "#1c1c1a" }};
+}

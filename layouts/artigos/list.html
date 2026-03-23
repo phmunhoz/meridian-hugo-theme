@@ -1,0 +1,126 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="blog-header">
+  <div class="container">
+    <div class="blog-header__inner">
+      <div>
+        <p class="page-label anim-1">{{ i18n "eyebrow_blog" }}</p>
+        <h1 class="anim-2">{{ .Title | default (.Site.Params.blog_title | default "Blog") }}</h1>
+      </div>
+      {{ with .Description }}<p class="blog-header__sub anim-3">{{ . }}</p>{{ end }}
+    </div>
+  </div>
+</div>
+
+
+{{/* ── FILTERS ── */}}
+<div class="blog-filters">
+  <div class="container">
+    <div class="blog-filters__bar">
+      <span class="blog-filters__label">{{ i18n "blog_filter_label" }}</span>
+      <a href="/artigos/" class="filter-tag{{ if not .IsHome }} active{{ end }}">{{ i18n "blog_filter_all" }}</a>
+      {{ range .Site.Taxonomies.categories }}
+      <a href="{{ .Page.RelPermalink }}" class="filter-tag">{{ .Page.Title }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── FEATURED POST ── */}}
+{{ $posts := .Pages }}
+{{ with first 1 $posts }}
+{{ range . }}
+<div class="blog-featured">
+  <div class="container">
+    <a href="{{ .RelPermalink }}" class="blog-featured__card">
+      <div class="blog-featured__img">
+        {{ with .Params.image }}
+        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+        {{ else }}
+        <div class="blog-featured__placeholder">{{ i18n "blog_img_placeholder" }}</div>
+        {{ end }}
+      </div>
+      <div class="blog-featured__body">
+        <div>
+          <div class="blog-featured__meta">
+            <span class="cat-label">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
+            <span class="blog-featured__date">{{ .Date.Format "2 Jan 2006" }}</span>
+          </div>
+          <h2>{{ .Title }}</h2>
+          <p>{{ .Description }}</p>
+        </div>
+        <span class="blog-featured__read">{{ i18n "read_more" }}</span>
+      </div>
+    </a>
+  </div>
+</div>
+{{ end }}
+{{ end }}
+
+<hr class="divider container">
+
+{{/* ── POSTS GRID ── */}}
+<div class="blog-grid-wrap section">
+  <div class="container">
+    <span class="section-label">{{ i18n "blog_recent_label" }}</span>
+    <div class="grid-3 blog-posts-grid">
+      {{ range after 1 .Pages }}
+      <a href="{{ .RelPermalink }}" class="blog-post-card">
+        <div class="blog-post-card__img">
+          {{ with .Params.image }}
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+          {{ else }}
+          <span class="blog-post-card__placeholder">{{ i18n "blog_img_placeholder" }}</span>
+          {{ end }}
+        </div>
+        <div class="blog-post-card__meta">
+          <span class="cat-label">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
+          <span class="blog-post-card__date">{{ .Date.Format "2 Jan 2006" }}</span>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        <div class="blog-post-card__footer">
+          <span class="blog-post-card__time">{{ .ReadingTime }} {{ i18n "blog_min_read" }}</span>
+          <span class="blog-post-card__arrow">→</span>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+
+    {{/* PAGINATION */}}
+    {{ template "pagination" . }}
+  </div>
+</div>
+
+{{ end }}
+
+{{/* ── PAGINATION PARTIAL ── */}}
+{{ define "pagination" }}
+{{ $paginator := .Paginator }}
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination" aria-label="{{ i18n "label_blog" }}">
+  {{ if $paginator.HasPrev }}
+  <a href="{{ $paginator.Prev.URL }}" class="page-btn">{{ i18n "pagination_prev" }}</a>
+  {{ else }}
+  <span class="page-btn page-btn--disabled">{{ i18n "pagination_prev" }}</span>
+  {{ end }}
+
+  <div class="page-numbers">
+    {{ range $paginator.Pagers }}
+    <a
+      href="{{ .URL }}"
+      class="page-num{{ if eq . $paginator }} page-num--current{{ end }}"
+      {{ if eq . $paginator }}aria-current="page"{{ end }}
+    >{{ .PageNumber }}</a>
+    {{ end }}
+  </div>
+
+  {{ if $paginator.HasNext }}
+  <a href="{{ $paginator.Next.URL }}" class="page-btn">{{ i18n "pagination_next" }}</a>
+  {{ else }}
+  <span class="page-btn page-btn--disabled">{{ i18n "pagination_next" }}</span>
+  {{ end }}
+</nav>
+{{ end }}
+{{ end }}

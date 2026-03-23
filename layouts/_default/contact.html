@@ -1,0 +1,152 @@
+{{ define "main" }}
+
+<div class="contact-page">
+  <div class="page-hero">
+    <div class="container">
+      <p class="page-label anim-1">{{ .Site.Params.contactPageLabel | default "Contact" }}</p>
+      <h1 class="anim-2">{{ .Site.Params.contactHeroTitle | default "Let's *talk.*" | markdownify }}</h1>
+      <p class="about-hero__sub anim-3" style="max-width:540px;">{{ .Description | default .Site.Params.contactHeroSubtitle }}</p>
+    </div>
+  </div>
+
+  <div class="contact-main">
+    <div class="container">
+      <div class="contact-grid">
+
+        <div class="contact-info">
+
+          {{ if .Site.Params.available }}
+          <div class="contact-block">
+            <div class="contact-block-label">{{ .Site.Params.availabilityLabel | default "Availability" }}</div>
+            <div class="availability-badge">
+              <div class="availability-dot"></div>
+              {{ .Site.Params.aboutAvailabilityText | default "Open to new projects" }}
+            </div>
+            {{ if .Site.Params.contactAvailabilityDesc }}
+            <p>{{ .Site.Params.contactAvailabilityDesc }}</p>
+            {{ end }}
+          </div>
+          {{ end }}
+
+          {{ if .Site.Params.email }}
+          <div class="contact-block">
+            <div class="contact-block-label">{{ .Site.Params.emailLabel | default "Email" }}</div>
+            <a href="mailto:{{ .Site.Params.email }}" class="contact-link">
+              <div class="contact-link__icon">✉</div>
+              <div>
+                <div class="contact-link__main">{{ .Site.Params.email }}</div>
+                <div class="contact-link__sub">{{ .Site.Params.emailResponseTime | default "Responds within 24h" }}</div>
+              </div>
+            </a>
+          </div>
+          {{ end }}
+
+          {{ if .Site.Params.whatsapp }}
+          <div class="contact-block">
+            <div class="contact-block-label">WhatsApp</div>
+            <a href="{{ .Site.Params.whatsapp }}" class="contact-link" target="_blank" rel="noopener">
+              <div class="contact-link__icon">💬</div>
+              <div>
+                <div class="contact-link__main">{{ .Site.Params.whatsappLabel | default "Send a message" }}</div>
+                <div class="contact-link__sub">{{ .Site.Params.whatsappSub | default "For urgent matters" }}</div>
+              </div>
+            </a>
+          </div>
+          {{ end }}
+
+          {{ if .Site.Params.linkedin }}
+          <div class="contact-block">
+            <div class="contact-block-label">LinkedIn</div>
+            <a href="{{ .Site.Params.linkedin }}" class="contact-link" target="_blank" rel="noopener">
+              <div class="contact-link__icon" style="font-size:12px;font-weight:700;">in</div>
+              <div>
+                <div class="contact-link__main">{{ .Site.Params.linkedin | replaceRE "https://linkedin.com/in/" "" }}</div>
+                <div class="contact-link__sub">{{ .Site.Params.linkedinSub | default "Connect there too" }}</div>
+              </div>
+            </a>
+          </div>
+          {{ end }}
+
+          {{ if .Site.Params.contactProjectTypes }}
+          <div class="contact-block">
+            <div class="contact-block-label">{{ .Site.Params.contactProjectTypesLabel | default "Project types" }}</div>
+            <div class="check-list">
+              {{ range .Site.Params.contactProjectTypes }}
+              <div class="check-item" style="font-size:14px;"><div class="check-item__dot"></div>{{ . }}</div>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+
+        </div>
+
+        <div class="contact-form-wrap">
+          <div id="form-content">
+            <h3 class="contact-form__title">{{ .Site.Params.contactFormTitle | default "Send a message" }}</h3>
+            {{ if .Site.Params.contactFormSubtitle }}
+            <p class="contact-form__sub">{{ .Site.Params.contactFormSubtitle }}</p>
+            {{ end }}
+            <form id="contact-form" action="mailto:{{ .Site.Params.email }}" method="POST" enctype="text/plain" novalidate>
+              <div class="field-row">
+                <div class="field">
+                  <label for="nome">{{ .Site.Params.contactFieldName | default "Name" }}</label>
+                  <input type="text" id="nome" name="nome" placeholder="{{ .Site.Params.contactFieldNamePlaceholder | default "Your name" }}" required>
+                </div>
+                <div class="field">
+                  <label for="empresa">{{ .Site.Params.contactFieldCompany | default "Company" }}</label>
+                  <input type="text" id="empresa" name="empresa" placeholder="{{ .Site.Params.contactFieldCompanyPlaceholder | default "Where you work (optional)" }}">
+                </div>
+              </div>
+              <div class="field">
+                <label for="email">{{ .Site.Params.contactFieldEmail | default "Email" }}</label>
+                <input type="email" id="email" name="email" placeholder="{{ .Site.Params.contactFieldEmailPlaceholder | default "your@email.com" }}" required>
+              </div>
+              {{ if .Site.Params.contactFormSelectOptions }}
+              <div class="field">
+                <label for="assunto">{{ .Site.Params.contactFieldSubject | default "Subject" }}</label>
+                <select id="assunto" name="assunto">
+                  <option value="" disabled selected>{{ .Site.Params.contactFieldSubjectPlaceholder | default "What would you like to talk about?" }}</option>
+                  {{ range .Site.Params.contactFormSelectOptions }}
+                  <option value="{{ .value }}">{{ .label }}</option>
+                  {{ end }}
+                </select>
+              </div>
+              {{ end }}
+              <div class="field">
+                <label for="mensagem">{{ .Site.Params.contactFieldMessage | default "Message" }}</label>
+                <textarea id="mensagem" name="mensagem" placeholder="{{ .Site.Params.contactFieldMessagePlaceholder | default "Tell me about your project..." }}" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">{{ .Site.Params.contactSubmitBtn | default "Send message →" }}</button>
+              {{ if .Site.Params.contactFormNote }}
+              <p class="contact-form__note">{{ .Site.Params.contactFormNote }}</p>
+              {{ end }}
+            </form>
+          </div>
+          <div class="form-success" id="form-success">
+            <div class="form-success__icon">✓</div>
+            <h3>{{ .Site.Params.contactSuccessTitle | default "Message sent." }}</h3>
+            <p>{{ .Site.Params.contactSuccessDesc | default "I'll get back to you within 24h." }}</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {{ if .Site.Params.contactStrip }}
+  <div class="contact-strip section--off" style="border-top:1px solid var(--gray-light);border-bottom:1px solid var(--gray-light);">
+    <div class="container">
+      <div class="contact-strip__inner">
+        {{ range .Site.Params.contactStrip }}
+        <div>
+          <div class="contact-block-label">{{ .label }}</div>
+          <p>{{ .text | markdownify }}</p>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</div>
+
+{{ end }}

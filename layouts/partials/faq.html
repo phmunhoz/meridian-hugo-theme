@@ -1,0 +1,15 @@
+{{ if .Site.Params.faq }}
+<div class="faq-list">
+  {{ range .Site.Params.faq }}
+  <div class="faq-item">
+    <button class="faq-question">
+      {{ .q }}
+      <span class="faq-arrow">+</span>
+    </button>
+    <div class="faq-answer">
+      <p>{{ .a }}</p>
+    </div>
+  </div>
+  {{ end }}
+</div>
+{{ end }}

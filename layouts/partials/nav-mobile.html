@@ -1,0 +1,16 @@
+<div class="nav__mobile" id="nav-mobile" aria-hidden="true">
+  {{ $contactLabel := .Site.Params.contactLabel | default "Contact" }}
+  {{ range .Site.Menus.main }}
+    {{ if ne .Name $contactLabel }}
+    <a
+      href="{{ .URL }}"
+      {{ if eq $.RelPermalink .URL }}aria-current="page"{{ end }}
+    >
+      {{ .Name }}
+    </a>
+    {{ end }}
+  {{ end }}
+  <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="nav__mobile-cta">
+    {{- .Site.Params.contactLabel | default "Contact" -}}
+  </a>
+</div>

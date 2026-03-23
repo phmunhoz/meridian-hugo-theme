@@ -1,0 +1,216 @@
+{{ define "main" }}
+
+<div class="page-hero section">
+  <div class="container">
+    <div class="about-hero__inner">
+      <div>
+        <p class="page-label anim-1">{{ .Site.Params.aboutPageLabel | default "About" }}</p>
+        <h1 class="anim-2">{{ .Site.Params.aboutHeroTitle | default "Technology and business.\nIn practice." | markdownify }}</h1>
+        <p class="about-hero__sub anim-3">{{ .Description | default .Site.Params.description }}</p>
+      </div>
+      <div class="about-hero__photo anim-4">
+        {{ if .Site.Params.authorPhoto }}
+        <div class="about-photo__frame">
+          <img src="{{ .Site.Params.authorPhoto }}" alt="{{ .Site.Params.author }}">
+        </div>
+        {{ else }}
+        <div class="about-photo__frame"><div class="about-photo__placeholder">photo</div></div>
+        {{ end }}
+        <p class="about-photo__caption">{{ .Site.Params.author }} · {{ .Site.Params.location }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider container">
+
+<div class="about-narrative section">
+  <div class="container">
+    <div class="about-narrative__inner">
+
+      <div class="about-body">
+        {{ .Content }}
+      </div>
+
+      <aside class="about-sidebar">
+
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutLocationLabel | default "Based in" }}</div>
+          <p>{{ .Site.Params.location }}</p>
+        </div>
+
+        {{ if .Site.Params.timeline }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutTimelineLabel | default "Timeline" }}</div>
+          <div class="about-timeline">
+            {{ range .Site.Params.timeline }}
+            <div class="about-timeline__item">
+              <div class="about-timeline__year">{{ .years }}</div>
+              <div class="about-timeline__desc">{{ .desc }}</div>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Site.Params.skills }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutSkillsLabel | default "Specialties" }}</div>
+          <div class="tag-cloud">
+            {{ range .Site.Params.skills }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+        {{ if .Site.Params.aboutEducation }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutEducationLabel | default "Education" }}</div>
+          <p>{{ .Site.Params.aboutEducation | markdownify }}</p>
+        </div>
+        {{ end }}
+
+        {{ if .Site.Params.aboutRecognition }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutRecognitionLabel | default "Recognition" }}</div>
+          <p>{{ .Site.Params.aboutRecognition }}</p>
+        </div>
+        {{ end }}
+
+        {{ if .Site.Params.available }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutAvailabilityLabel | default "Availability" }}</div>
+          <div class="badge badge--pulse">{{ .Site.Params.aboutAvailabilityText | default "Open to new projects" }}</div>
+        </div>
+        {{ end }}
+
+        {{ $cases := where .Site.RegularPages "Section" "cases" }}
+        {{ if $cases }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutCasesLabel | default "Cases" }}</div>
+          <div class="about-sidebar__links">
+            {{ range first 2 $cases }}
+            <a href="{{ .RelPermalink }}" class="about-sidebar__link">
+              <span>{{ .Title }}</span>
+              <span class="about-sidebar__arrow">→</span>
+            </a>
+            {{ end }}
+            <a href="{{ $.Site.Params.casesURL | default "/cases/" }}" class="about-sidebar__all">{{ $.Site.Params.viewAllCases | default "View all →" }}</a>
+          </div>
+        </div>
+        {{ end }}
+
+        {{ $products := where .Site.RegularPages "Section" "produtos" }}
+        {{ if $products }}
+        <div class="about-sidebar__block">
+          <div class="about-sidebar__label">{{ .Site.Params.aboutProductsLabel | default "Products" }}</div>
+          <div class="about-sidebar__links">
+            {{ range first 3 $products }}
+            <a href="{{ .RelPermalink }}" class="about-sidebar__link">
+              <span>{{ .Title }}</span>
+              <span class="about-sidebar__arrow">→</span>
+            </a>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+
+      </aside>
+    </div>
+  </div>
+</div>
+
+{{ if .Site.Params.differentiators }}
+<div class="section--off section" style="border-top:1px solid var(--gray-light);">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.aboutDifferentiatorsLabel | default "How I work" }}</span>
+    <div class="about-differentiators">
+      {{ range .Site.Params.differentiators }}
+      <div class="about-differentiator">
+        <div class="about-differentiator__num">{{ .num | default "—" }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.testimonials }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.testimonialsLabel | default "What people say" }}</span>
+    <div class="about-recs">
+      {{ range .Site.Params.testimonials }}
+      <div class="about-rec">
+        <p class="about-rec__quote">{{ .quote }}</p>
+        <div class="about-rec__author">
+          <div class="about-rec__name">{{ .name }}</div>
+          <div class="about-rec__role">{{ .role }}</div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ $cases := where .Site.RegularPages "Section" "cases" }}
+{{ $products := where .Site.RegularPages "Section" "produtos" }}
+{{ if or $cases $products }}
+<div class="section--off section" style="border-top:1px solid var(--gray-light);">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.selectedWorkLabel | default "Selected work" }}</span>
+    <div class="about-work">
+      {{ if $cases }}
+      <div>
+        <p class="about-work__cat">{{ .Site.Params.casesLabel | default "Cases" }}</p>
+        <div class="about-work__cards">
+          {{ range first 2 $cases }}
+          <a href="{{ .RelPermalink }}" class="card about-work__card">
+            {{ with .Params.case_type }}<div class="cat-label" style="margin-bottom:10px;">{{ . }}</div>{{ end }}
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description }}</p>
+            <span class="about-work__link">{{ $.Site.Params.readMoreLabel | default "See case →" }}</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+      {{ if $products }}
+      <div>
+        <p class="about-work__cat">{{ .Site.Params.productsLabel | default "Products" }}</p>
+        <div class="about-work__cards">
+          {{ range first 2 $products }}
+          <a href="{{ .RelPermalink }}" class="card about-work__card">
+            {{ with .Params.product_type }}<div class="cat-label" style="margin-bottom:10px;">{{ . }}</div>{{ end }}
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Description }}</p>
+            <span class="about-work__link">{{ $.Site.Params.readMoreLabel | default "Learn more →" }}</span>
+          </a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<section class="cta-section cta-section--dark">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Site.Params.aboutCTATitle | default "Have a project that needs someone who understands and delivers?" | markdownify }}</h2>
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.aboutCTAURL | default (.Site.Params.servicesURL | default "/shopify/") }}" class="btn btn-primary">{{ .Site.Params.aboutCTABtn | default "View services →" }}</a>
+        <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-ghost-dark">{{ .Site.Params.contactLabel | default "Get in touch" }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

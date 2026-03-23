@@ -1,0 +1,26 @@
+{{ if .Site.Params.newsletterTitle }}
+<div class="newsletter">
+  <div class="container">
+    <div class="newsletter__inner">
+      <div>
+        {{ if .Site.Params.newsletterLabel }}
+        <p class="newsletter__label">{{ .Site.Params.newsletterLabel }}</p>
+        {{ end }}
+        <h2>{{ .Site.Params.newsletterTitle | safeHTML }}</h2>
+        {{ if .Site.Params.newsletterDesc }}
+        <p>{{ .Site.Params.newsletterDesc }}</p>
+        {{ end }}
+      </div>
+      <div>
+        <form class="newsletter__form" id="newsletter-form">
+          <input type="email" placeholder="{{ .Site.Params.newsletterPlaceholder | default "your@email.com" }}" required>
+          <button type="submit">{{ .Site.Params.newsletterBtn | default "Subscribe →" }}</button>
+        </form>
+        {{ if .Site.Params.newsletterNote }}
+        <p class="newsletter__note">{{ .Site.Params.newsletterNote }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

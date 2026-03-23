@@ -1,0 +1,191 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="consulting-hero-wrap">
+  <div class="container">
+    <div class="consulting-hero">
+      <div>
+        <p class="page-label anim-1">{{ .Site.Params.consultingPageLabel | default "Consulting" }}</p>
+        <h1 class="anim-2">{{ .Site.Params.consultingHeroTitle | default "Clarity to decide.\nSkill to execute." | markdownify }}</h1>
+        <p class="about-hero__sub anim-3">{{ .Description | default .Site.Params.description }}</p>
+        <div class="hero__actions anim-4">
+          <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-primary">{{ .Site.Params.consultingHeroCTA | default "Talk about your project →" }}</a>
+          <a href="#como-trabalho" class="btn btn-ghost">{{ .Site.Params.consultingHeroCTA2 | default "How I work" }}</a>
+        </div>
+      </div>
+      {{ if .Site.Params.consultingChecks }}
+      <div class="anim-4">
+        <p class="consulting-checks-label">{{ .Site.Params.consultingChecksLabel | default "I typically work in scenarios like" }}</p>
+        <div class="cenarios-block">
+          {{ range .Site.Params.consultingChecks }}
+          <div class="scenario-item"><div class="scenario-dot"></div><span>{{ . }}</span></div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── PILLARS ── */}}
+{{ if .Site.Params.consultingPillars }}
+<div class="section-wrap">
+  <p class="section-label">{{ .Site.Params.consultingAreasSectionLabel | default "Areas of expertise" }}</p>
+  <h2>{{ .Site.Params.consultingAreasTitle | default "Three pillars.\nOne integrated vision." | markdownify }}</h2>
+  {{ if .Site.Params.consultingAreasIntro }}
+  <p class="section-intro">{{ .Site.Params.consultingAreasIntro }}</p>
+  {{ end }}
+  <div class="pilares-grid">
+    {{ range .Site.Params.consultingPillars }}
+    <div class="pillar-card">
+      <div class="pilar-num">{{ .num }}</div>
+      <h3>{{ .title }}</h3>
+      <p>{{ .desc }}</p>
+      {{ if .items }}
+      <div class="pilar-topics">
+        {{ range .items }}
+        <div class="pilar-topic"><div class="pilar-topic-dot"></div>{{ . }}</div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<hr class="divider container">
+{{ end }}
+
+{{/* ── COMO TRABALHO ── */}}
+<div class="como-section" id="como-trabalho">
+  <div class="como-inner">
+    <p class="section-label">{{ .Site.Params.consultingProcessSectionLabel | default "How I work" }}</p>
+    <h2>{{ .Site.Params.consultingProcessTitle | default "From diagnosis\nto execution." | markdownify }}</h2>
+    <div class="como-grid">
+      <div class="como-left">
+        {{ range .Site.Params.consultingProcess }}
+        <div class="how-step">
+          <div class="how-step-num">{{ .num }}</div>
+          <div>
+            <h3>{{ .title }}</h3>
+            <p>{{ .desc }}</p>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ if .Site.Params.differentiators }}
+      <div class="como-right">
+        <div class="differentiator-block">
+          <h3>{{ .Site.Params.whyMeTitle | default "What sets me apart" }}</h3>
+          {{ range .Site.Params.differentiators }}
+          <div class="diferencial-item">
+            <div class="diferencial-label">{{ .label }}</div>
+            <p>{{ .desc }}</p>
+          </div>
+          {{ end }}
+          <a href="{{ $.Site.Params.contactURL | default "/contact/" }}" class="btn btn-primary btn-sm" style="margin-top:6px;">{{ $.Site.Params.contactLabel | default "Get in touch →" }}</a>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── PARA QUEM ── */}}
+{{ if .Site.Params.consultingForWho }}
+<div class="section-wrap">
+  <p class="section-label">{{ .Site.Params.consultingForWhoSectionLabel | default "Who I work with" }}</p>
+  <h2>{{ .Site.Params.consultingForWhoTitle | default "Company profiles\nI typically work with." | markdownify }}</h2>
+  {{ if .Site.Params.consultingForWhoIntro }}
+  <p class="section-intro">{{ .Site.Params.consultingForWhoIntro }}</p>
+  {{ end }}
+  <div class="paraquem-grid">
+    {{ range .Site.Params.consultingForWho }}
+    <div class="paraquem-card">
+      <div class="paraquem-tag">{{ .tag }}</div>
+      <h3>{{ .title }}</h3>
+      <p>{{ .desc }}</p>
+    </div>
+    {{ end }}
+  </div>
+
+  {{/* ── SERVICE BRIDGE ── */}}
+  {{ if $.Site.Params.servicesURL }}
+  <div class="service-bridge-card" style="margin-top:56px;">
+    <div>
+      {{ if $.Site.Params.consultingServicesBridgeLabel }}<p class="cat-label" style="margin-bottom:12px;">{{ $.Site.Params.consultingServicesBridgeLabel }}</p>{{ end }}
+      <h3>{{ $.Site.Params.consultingServicesBridgeTitle | default "Consulting that leads to platform migration" }}</h3>
+      <p>{{ $.Site.Params.consultingServicesBridgeDesc }}</p>
+    </div>
+    {{ if $.Site.Params.consultingServicesBridgeChecks }}
+    <div class="service-bridge-card__right">
+      <div class="cenarios-block">
+        {{ range $.Site.Params.consultingServicesBridgeChecks }}
+        <div class="scenario-item"><div class="scenario-dot"></div><span>{{ . }}</span></div>
+        {{ end }}
+      </div>
+      <a href="{{ $.Site.Params.servicesURL | default "/shopify/" }}" class="btn btn-primary btn-sm" style="margin-top:24px;">{{ $.Site.Params.consultingServicesBridgeCTA | default "View services →" }}</a>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{/* ── PULL QUOTE ── */}}
+{{ if .Site.Params.consultingPullQuote }}
+<div class="pull-section">
+  <div class="pull-inner">
+    <div class="pull-quote">
+      <p>{{ .Site.Params.consultingPullQuote }}</p>
+    </div>
+    <div class="pull-right">
+      {{ if .Site.Params.consultingPullDesc }}<p>{{ .Site.Params.consultingPullDesc }}</p>{{ end }}
+      <a href="{{ .Site.Params.aboutURL | default "/about/" }}" class="btn btn-green">{{ .Site.Params.consultingPullCTA | default "My story →" }}</a>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CLIENTES ── */}}
+{{ if .Site.Params.consultingClients }}
+<div class="clientes-section">
+  <div class="clientes-inner">
+    <p class="section-label">{{ .Site.Params.consultingClientsSectionLabel | default "Context" }}</p>
+    <h2>{{ .Site.Params.consultingClientsTitle | default "Companies and sectors\nI've worked with." | markdownify }}</h2>
+    {{ if .Site.Params.consultingClientsIntro }}
+    <p class="section-intro">{{ .Site.Params.consultingClientsIntro }}</p>
+    {{ end }}
+    <div class="clientes-grid">
+      {{ range .Site.Params.consultingClients }}
+      <div class="client-card">
+        <div class="cliente-sector">{{ .sector }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CASES ── */}}
+{{ partial "cases-block.html" . }}
+
+{{/* ── CTA ── */}}
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Site.Params.consultingCTATitle | default "Have a problem that needs clarity before a solution?" | markdownify }}</h2>
+        {{ if .Site.Params.consultingCTADesc }}<p class="cta-section__desc">{{ .Site.Params.consultingCTADesc }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-white">{{ .Site.Params.contactLabel | default "Get in touch →" }}</a>
+        {{ if .Site.Params.consultingCTANote }}<p class="cta-section__note">{{ .Site.Params.consultingCTANote }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

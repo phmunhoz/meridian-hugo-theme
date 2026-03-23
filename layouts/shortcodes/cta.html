@@ -1,0 +1,21 @@
+{{/*
+  Uso: {{< cta titulo="..." desc="..." btn="..." url="..." >}}
+  Optional parameters: btn2, url2 (second ghost button)
+*/}}
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Get "titulo" }}</h2>
+        {{ with .Get "desc" }}<p class="cta-section__desc">{{ . }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Get "url" }}" class="btn btn-white">{{ .Get "btn" }}</a>
+        {{ with .Get "btn2" }}
+        <a href="{{ $.Get "url2" }}" class="btn btn-ghost-dark">{{ . }}</a>
+        {{ end }}
+        {{ with .Get "nota" }}<p class="cta-section__note">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</div>

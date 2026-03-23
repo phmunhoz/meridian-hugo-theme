@@ -1,0 +1,203 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="product-hero section">
+  <div class="container">
+    <div class="product-hero__inner">
+      <div>
+        <nav class="breadcrumb anim-1">
+          <a href="{{ .Site.Params.projectsURL | default "/projetos/" }}">{{ i18n "label_projects" | default "Projetos" }}</a>
+          <span class="breadcrumb__sep">/</span>
+          {{ .Title }}
+        </nav>
+        <p class="page-label anim-2">{{ .Params.product_label | default (.Params.product_type | title) }}</p>
+        <h1 class="anim-3">{{ .Params.hero_title | default .Title | markdownify }}</h1>
+        {{ with .Description }}<p class="product-hero__sub anim-4">{{ . }}</p>{{ end }}
+
+        <div class="product-hero__actions anim-5">
+          {{ if .Params.external_url }}
+          <a href="{{ .Params.external_url }}" class="btn btn-primary" target="_blank" rel="noopener">{{ i18n "access_product" (dict "Name" $.Title) }}</a>
+          {{ else }}
+          <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-primary">{{ i18n "btn_contact_arrow" | default "Fale comigo →" }}</a>
+          {{ end }}
+          {{ if .Params.how_steps }}
+          <a href="#como-funciona" class="btn btn-ghost">{{ i18n "btn_how_it_works" | default "Como funciona" }}</a>
+          {{ end }}
+        </div>
+
+        {{ with .Params.metrics }}
+        <div class="product-hero__metrics">
+          {{ range . }}
+          <div class="product-metric">
+            <div class="product-metric__num">{{ .number }}</div>
+            <div class="product-metric__label">{{ .label }}</div>
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+
+      <div class="product-hero__screen">
+        {{ with .Params.image }}
+        <img src="{{ . }}" alt="{{ $.Title }}">
+        {{ else }}
+        <div class="product-hero__placeholder">
+          <span>{{ i18n "product_screenshot_placeholder" | default "screenshot do app" }}</span>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider container">
+
+{{/* ── PROBLEMA ── */}}
+{{ if .Params.problem_title }}
+<div class="section">
+  <div class="container">
+    <div class="produto-problema">
+      <div class="produto-problema__left">
+        {{ with .Params.problem_label }}<span class="section-label">{{ . }}</span>{{ end }}
+        <h2>{{ .Params.problem_title }}</h2>
+        {{ range .Params.problem_paragraphs }}
+        <p style="font-size:16px;color:#555553;font-weight:300;line-height:1.85;margin-bottom:16px;">{{ . }}</p>
+        {{ end }}
+      </div>
+      <div class="produto-problema__right">
+        {{ if .Params.carriers }}
+        {{ with .Params.carriers_label }}<span class="section-label">{{ . }}</span>{{ end }}
+        <div class="produto-carriers">
+          {{ range .Params.carriers }}
+          <span class="produto-carrier-tag">{{ . }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+        {{ with .Params.problem_image }}
+        <div class="produto-problema__image">
+          <img src="{{ . }}" alt="{{ $.Title }}">
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── FUNCIONALIDADES ── */}}
+{{ if .Params.features }}
+<div class="section--off section">
+  <div class="container">
+    {{ with .Params.features_label }}<span class="section-label">{{ . }}</span>{{ end }}
+    <h2>{{ .Params.features_title | markdownify }}</h2>
+    <div class="produto-func-grid">
+      {{ range .Params.features }}
+      <div class="produto-func-item">
+        {{ with .icon }}<div class="produto-func-icon">{{ . }}</div>{{ end }}
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── COMO FUNCIONA ── */}}
+{{ if .Params.how_steps }}
+<div class="section" id="como-funciona">
+  <div class="container">
+    {{ with .Params.how_label }}<span class="section-label">{{ . }}</span>{{ end }}
+    <h2>{{ .Params.how_title | markdownify }}</h2>
+    {{ with .Params.how_intro }}<p class="section__intro">{{ . }}</p>{{ end }}
+    <div class="processo-grid" style="margin-top:48px;">
+      {{ range .Params.how_steps }}
+      <div class="processo-step">
+        <div class="processo-num">{{ .num }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── PLANOS ── */}}
+{{ if .Params.plans }}
+<div class="plans-section section">
+  <div class="container">
+    {{ with .Params.plans_label }}<span class="section-label section-label--green">{{ . }}</span>{{ end }}
+    <h2 style="color:white;">{{ .Params.plans_title }}</h2>
+    {{ with .Params.plans_intro }}<p class="planos-intro">{{ . }}</p>{{ end }}
+    <div class="planos-grid">
+      {{ range .Params.plans }}
+      <div class="plano-card{{ if .featured }} plano-card--featured{{ end }}">
+        {{ with .badge }}<div class="plano-badge">{{ . }}</div>{{ end }}
+        <div class="plano-nome">{{ .name }}</div>
+        <div class="plano-preco">
+          {{ with .price_prefix }}<sup>{{ . }}</sup>{{ end }}{{ .price }}<span>{{ .period }}</span>
+        </div>
+        {{ with .desc }}<div class="plano-desc">{{ . }}</div>{{ end }}
+        {{ with .features }}
+        <div class="plano-features">
+          {{ range . }}
+          <div class="plano-feature"><span class="plano-check">✓</span>{{ . }}</div>
+          {{ end }}
+        </div>
+        {{ end }}
+        {{ $cta := .cta }}{{ $ctaStyle := .cta_style }}
+        {{ with $.Params.external_url }}
+        <a href="{{ . }}" class="plano-btn {{ if eq $ctaStyle "primary" }}plano-btn--primary{{ else }}plano-btn--ghost{{ end }}" target="_blank" rel="noopener">{{ $cta }}</a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── SOBRE O CRIADOR ── */}}
+{{ if .Params.creator_title }}
+<div class="section">
+  <div class="container">
+    <div class="product-creator">
+      <div>
+        {{ with .Params.creator_label }}<span class="section-label">{{ . }}</span>{{ end }}
+        <h2>{{ .Params.creator_title }}</h2>
+        {{ range .Params.creator_paragraphs }}
+        <p style="font-size:16px;color:#555553;font-weight:300;line-height:1.85;margin-bottom:14px;">{{ . }}</p>
+        {{ end }}
+      </div>
+      <div style="background:var(--off-white);border:1px solid var(--gray-light);padding:40px;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">Desenvolvido por</div>
+        <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--black);letter-spacing:-0.3px;margin-bottom:14px;line-height:1.2;">{{ .Site.Params.author }}</h3>
+        <p style="font-size:14px;color:#555553;font-weight:300;line-height:1.75;margin-bottom:14px;">{{ .Site.Params.author_bio_short | default "Shopify Partner e consultor de e-commerce com mais de 20 anos de experiência. Especializado em migrações para Shopify e operações de e-commerce no Brasil." }}</p>
+        <a href="{{ .Site.Params.aboutURL | default "/sobre/" }}" style="font-size:14px;color:var(--green);font-weight:500;text-decoration:none;border-bottom:1px solid var(--green-light);">Conheça minha trajetória →</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CTA ── */}}
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Params.cta_title | default (i18n "product_cta_title") }}</h2>
+        {{ with .Params.cta_desc }}<p class="cta-section__desc">{{ . }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        {{ if .Params.external_url }}
+        <a href="{{ .Params.external_url }}" class="btn btn-white" target="_blank" rel="noopener">{{ .Params.cta_btn | default (i18n "access_product" (dict "Name" $.Title)) }}</a>
+        {{ else }}
+        <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-white">{{ .Params.cta_btn | default (i18n "btn_contact_arrow") }}</a>
+        {{ end }}
+        {{ with .Params.cta_note }}<p class="cta-section__note">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

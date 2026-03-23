@@ -1,0 +1,192 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="case-hero section--dark">
+  <div class="container">
+    <nav class="breadcrumb breadcrumb--dark anim-1">
+      {{ with .Params.case_type }}
+      <a href="/{{ . }}/">{{ . | title }}</a>
+      {{ else }}
+      <a href="/projetos/">{{ i18n "label_projects" }}</a>
+      {{ end }}
+      <span class="breadcrumb__sep">/</span>
+      {{ i18n "label_cases" | default "Cases" }}
+    </nav>
+    <p class="page-label page-label--accent anim-2">Case · {{ .Params.case_label | default (.Params.case_type | title) }}</p>
+    <h1 class="anim-3">{{ .Title }}</h1>
+    {{ with .Description }}<p class="case-hero__lead anim-4">{{ . }}</p>{{ end }}
+
+    {{ with .Params.metrics }}
+    <div class="metric-strip metric-strip--dark anim-5">
+      {{ range . }}
+      <div class="metric">
+        <div class="metric__number metric__number--accent">{{ .number }}</div>
+        <div class="metric__label metric__label--dark">{{ .label }}</div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+{{/* ── CONTEXTO ── */}}
+{{ if .Params.contexto_title }}
+<div class="section--off section" style="border-bottom:1px solid var(--gray-light);">
+  <div class="container">
+    <div class="case-contexto">
+      <div>
+        {{ with .Params.contexto_label }}<span class="section-label">{{ . }}</span>{{ end }}
+        <h2>{{ .Params.contexto_title }}</h2>
+        {{ range .Params.contexto_paragraphs }}
+        <p style="font-size:16px;color:#555553;font-weight:300;line-height:1.85;margin-bottom:16px;">{{ . }}</p>
+        {{ end }}
+      </div>
+      <div class="case-meta-card">
+        {{ with .Params.sector }}
+        <div class="case-meta-card__item">
+          <div class="case-meta-card__label">Setor</div>
+          <div class="case-meta-card__value">{{ . }}</div>
+        </div>
+        {{ end }}
+        {{ with .Params.size }}
+        <div class="case-meta-card__item">
+          <div class="case-meta-card__label">Porte</div>
+          <div class="case-meta-card__value">{{ . }}</div>
+        </div>
+        {{ end }}
+        {{ with .Params.platform_origin }}
+        <div class="case-meta-card__item">
+          <div class="case-meta-card__label">Plataforma de origem</div>
+          <div class="case-meta-card__value">{{ . }}</div>
+        </div>
+        {{ end }}
+        {{ with .Params.platform_dest }}
+        <div class="case-meta-card__item">
+          <div class="case-meta-card__label">Destino</div>
+          <div class="case-meta-card__value">{{ . }}</div>
+        </div>
+        {{ end }}
+        {{ with .Params.duration }}
+        <div class="case-meta-card__item">
+          <div class="case-meta-card__label">Duração</div>
+          <div class="case-meta-card__value">{{ . }}</div>
+        </div>
+        {{ end }}
+        {{ with .Params.role }}
+        <div class="case-meta-card__item">
+          <div class="case-meta-card__label">Atuação</div>
+          <div class="case-meta-card__value">{{ . }}</div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── DESAFIOS ── */}}
+{{ if .Params.desafios }}
+<hr class="divider container">
+<div class="section">
+  <div class="container">
+    {{ with .Params.desafios_label }}<span class="section-label">{{ . }}</span>{{ end }}
+    <h2>{{ .Params.desafios_title }}</h2>
+    {{ with .Params.desafios_intro }}<p style="font-size:16px;color:#555553;font-weight:300;line-height:1.85;max-width:760px;margin-bottom:32px;">{{ . }}</p>{{ end }}
+    <div class="case-desafio-grid">
+      {{ range .Params.desafios }}
+      <div class="case-desafio-item">
+        <span class="case-desafio-icon">{{ .icon }}</span>
+        <div>
+          <strong>{{ .title }}</strong>
+          <span>{{ .desc }}</span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── SOLUÇÃO ── */}}
+{{ if .Params.solucao_steps }}
+<div class="section--dark section">
+  <div class="container">
+    {{ with .Params.solucao_label }}<span class="section-label section-label--green">{{ . }}</span>{{ end }}
+    <h2 style="color:white;">{{ .Params.solucao_title | markdownify }}</h2>
+    {{ with .Params.solucao_intro }}<p style="font-size:16px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.85;max-width:680px;margin-bottom:52px;">{{ . }}</p>{{ end }}
+    <div class="case-solucao-steps">
+      {{ range .Params.solucao_steps }}
+      <div class="case-solucao-step">
+        <div class="case-solucao-step__num">{{ .num }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── RESULTADOS ── */}}
+{{ if .Params.resultados_cards }}
+<div class="section">
+  <div class="container">
+    {{ with .Params.resultados_label }}<span class="section-label">{{ . }}</span>{{ end }}
+    <h2>{{ .Params.resultados_title }}</h2>
+    <div class="case-resultados-grid">
+      {{ range .Params.resultados_cards }}
+      <div class="case-resultado-card">
+        <div class="case-resultado-card__num">{{ .num }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+    {{ with .Params.resultados_outro }}
+    <p style="font-size:16px;color:#555553;font-weight:300;line-height:1.85;max-width:760px;margin-top:48px;">{{ . }}</p>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* ── APRENDIZADOS ── */}}
+{{ if .Params.aprendizados }}
+<div class="section--off section">
+  <div class="container">
+    {{ with .Params.aprendizados_label }}<span class="section-label">{{ . }}</span>{{ end }}
+    <h2>{{ .Params.aprendizados_title }}</h2>
+    <div class="case-aprendizado-list">
+      {{ range .Params.aprendizados }}
+      <div class="case-aprendizado-item">
+        <div class="case-aprendizado-num">{{ .num }}</div>
+        <div class="case-aprendizado-content">
+          <h3>{{ .title }}</h3>
+          <p>{{ .desc }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CTA ── */}}
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Params.cta_title | default (i18n "case_cta_title") }}</h2>
+        {{ with .Params.cta_desc }}<p class="cta-section__desc">{{ . }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-white">{{ i18n "btn_contact_arrow" }}</a>
+        {{ with .Params.cta_service_url }}
+        <a href="{{ . }}" class="btn btn-ghost-dark">{{ $.Params.cta_service_label | default "Ver como funciona" }}</a>
+        {{ end }}
+        {{ with .Params.cta_note }}<p class="cta-section__note">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

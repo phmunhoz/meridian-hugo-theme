@@ -1,0 +1,185 @@
+# ── NAVIGATION ──────────────────────────────────
+nav_skip = "Skip to content"
+
+# ── COMMON ACTIONS ───────────────────────────────
+read_more = "Read more →"
+view_case = "View case →"
+view_all_cases = "View all cases →"
+see_all = "See all →"
+get_in_touch = "Get in touch →"
+learn_more = "Learn more →"
+access_product = "Access {{ .Name }} →"
+
+# ── COMMON LABELS ────────────────────────────────
+label_cases = "Cases"
+label_blog = "Blog"
+label_services = "Services"
+label_products = "Products"
+label_about = "About"
+label_projects = "Projects"
+label_consulting = "Consulting"
+label_contact = "Contact"
+label_section_cases = "Cases"
+label_section_blog = "Blog"
+label_new = "New"
+
+# ── SECTION EYEBROWS ─────────────────────────────
+eyebrow_cases = "Cases"
+eyebrow_services = "Services"
+eyebrow_about = "About"
+eyebrow_consulting = "Consulting"
+eyebrow_projects = "Projects & Products"
+eyebrow_contact = "Contact"
+eyebrow_blog = "Blog"
+eyebrow_how_it_works = "How it works"
+eyebrow_differentials = "How I work"
+eyebrow_testimonials = "What they say"
+eyebrow_selected_work = "Selected work"
+eyebrow_faq = "Frequently asked questions"
+eyebrow_next_level = "Next level"
+eyebrow_background = "Background"
+eyebrow_process = "Process"
+
+# ── AVAILABILITY ─────────────────────────────────
+available_badge = "Open to new projects"
+not_available_badge = "Not taking new clients"
+
+# ── PARTNER BAR ──────────────────────────────────
+partner_bar_text = "<strong>Certified Partner:</strong> direct platform support, exclusive development resources and revenue share on projects."
+partner_bar_cta = "Talk about your project →"
+
+# ── BLOG ─────────────────────────────────────────
+blog_filter_label = "Filter"
+blog_filter_all = "All"
+blog_min_read = "min read"
+blog_prev = "← Newer"
+blog_next = "Older →"
+blog_breadcrumb = "Blog"
+blog_sidebar_cta_title = "Working on something similar?"
+blog_sidebar_cta_body = "Let's start with a conversation. No commitment."
+blog_sidebar_cta_link = "See services →"
+blog_post_prev = "← Previous"
+blog_post_next = "Next →"
+blog_recent_label = "Recent articles"
+blog_img_placeholder = "post image"
+blog_share_label = "Share"
+blog_toc_label = "In this article"
+blog_sidebar_cta_question = "Need help with this?"
+blog_related_label = "Related articles"
+blog_author_role = "Independent Consultant"
+
+# ── CASES ────────────────────────────────────────
+case_breadcrumb_label = "Cases"
+case_duration_label = "Duration"
+case_role_label = "Role"
+case_sector_label = "Sector"
+case_size_label = "Size"
+case_platform_from_label = "From"
+case_platform_to_label = "To"
+case_metric_strip_title = "Results"
+case_cta_title = "Does your operation have a similar profile?"
+case_cta_body = "Let's start with a conversation about where you are today. No commitment — I'll honestly tell you if and how I can help."
+case_cta_link = "View services"
+
+# ── PRODUCTS ─────────────────────────────────────
+product_breadcrumb_label = "Products"
+product_screenshot_placeholder = "product screenshot"
+product_creator_label = "Who's behind it"
+product_creator_cta = "See my background →"
+product_cta_title = "Ready to try it?"
+product_cta_body = "Start with the free plan. If you have any questions, reach out directly."
+product_try_free = "Try free →"
+product_contact_link = "Contact →"
+product_traction_label = "Traction"
+product_developed_by = "Developed by"
+product_creator_origin = "was born from a real pain point found in real projects."
+
+# ── CONTACT ──────────────────────────────────────
+contact_availability_label = "Availability"
+contact_email_label = "Email"
+contact_whatsapp_label = "WhatsApp"
+contact_whatsapp_cta = "Message on WhatsApp"
+contact_whatsapp_sub = "For urgent matters"
+contact_linkedin_label = "LinkedIn"
+contact_linkedin_sub = "Connect there too"
+contact_project_types_label = "Project types"
+contact_how_label = "How it works"
+contact_no_commitment_label = "No upfront commitment"
+contact_location_label = "Based in"
+
+# Contact form
+form_name = "Name"
+form_name_placeholder = "Your name"
+form_company = "Company"
+form_company_placeholder = "Where you work (optional)"
+form_email = "Email"
+form_email_placeholder = "your@email.com"
+form_subject = "Subject"
+form_subject_placeholder = "What do you want to talk about?"
+form_message = "Message"
+form_message_placeholder = "Tell us a bit about the situation, what you're looking for, and any relevant context..."
+form_send = "Send message →"
+form_note = "I'll reply within 24h. No spam, no third parties."
+form_success_icon = "✓"
+form_success_title = "Message sent."
+form_success_body = "I got your message and will reply within 24h. For urgent matters, message me on WhatsApp."
+
+# ── ABOUT ────────────────────────────────────────
+about_based_in_label = "Based in"
+about_background_label = "Background"
+about_skills_label = "Skills"
+about_education_label = "Education"
+about_recognition_label = "Recognition"
+about_availability_label = "Availability"
+about_cases_label = "Cases"
+about_products_label = "Products"
+about_photo_caption = "{{ .Site.Params.author }} · {{ .Site.Params.location }}"
+
+# ── SERVICES ─────────────────────────────────────
+service_economy_label = "Typical savings"
+service_continuous_label = "Ongoing engagement"
+service_downtime_label = "0h downtime"
+service_next_step = "See more →"
+service_migration_tag = "Migration"
+service_maintenance_tag = "Evolution"
+service_before_title = "Before"
+service_after_title = "After"
+service_process_title = "From discovery to go-live."
+service_process_intro = "The current operation keeps running normally throughout the migration — the cutover happens in a controlled window."
+service_step_1_title = "Audit & discovery"
+service_step_2_title = "Architecture"
+service_step_3_title = "Parallel build"
+service_step_4_title = "Validation & go-live"
+service_cta_title = "Want to understand if migration makes sense for your operation?"
+service_cta_body = "We start with a no-commitment conversation. You tell me how things are today — I'll honestly say if and how migration makes sense."
+service_faq_title = "Common questions."
+
+# Maintenance
+maintenance_how_title = "Ongoing engagement,\nnot reactive support."
+maintenance_how_body_1 = "I don't work as reactive support — where you open a ticket and wait. The idea is a close working relationship where I understand the business deeply enough to anticipate problems and opportunities."
+maintenance_how_body_2 = "Most clients who start with maintenance and evolution naturally expand the engagement — new integrations, feature development, and often a move to the enterprise tier when volume justifies it."
+maintenance_model_title = "How the engagement works in practice"
+maintenance_plus_cta = "Upgrade to enterprise →"
+
+# ── NEWSLETTER ───────────────────────────────────
+newsletter_eyebrow = "Newsletter"
+newsletter_email_placeholder = "your@email.com"
+newsletter_subscribe = "Subscribe →"
+newsletter_note = "Cancel anytime."
+
+# ── FOOTER ───────────────────────────────────────
+footer_rights = "All rights reserved."
+
+# ── PAGINATION ───────────────────────────────────
+pagination_prev = "← Newer"
+pagination_next = "Older →"
+
+# ── BREADCRUMB ───────────────────────────────────
+breadcrumb_home = "Home"
+
+# ── BUTTONS ──────────────────────────────────────
+btn_contact = "Get in touch"
+btn_contact_arrow = "Get in touch →"
+btn_migrate = "Migrate now →"
+btn_how_it_works = "How it works"
+btn_learn_more = "Learn more →"

@@ -1,0 +1,45 @@
+<nav class="nav" id="nav" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav__inner">
+
+      <a href="/" class="nav__logo">
+        PH<span>.</span>Munhoz
+      </a>
+
+      <ul class="nav__links" role="list">
+        {{ $contactLabel := .Site.Params.contactLabel | default "Contact" }}
+        {{ range .Site.Menus.main }}
+          {{ if ne .Name $contactLabel }}
+          <li>
+            <a
+              href="{{ .URL }}"
+              {{ if .Params.highlight }}class="is-highlight"{{ end }}
+              {{ if eq $.RelPermalink .URL }}aria-current="page"{{ end }}
+            >
+              {{ .Name }}
+            </a>
+          </li>
+          {{ end }}
+        {{ end }}
+        <li>
+          <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="nav__cta">
+            {{- .Site.Params.contactLabel | default "Contact" -}}
+          </a>
+        </li>
+      </ul>
+
+      <button
+        class="nav__burger"
+        id="nav-burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </div>
+</nav>

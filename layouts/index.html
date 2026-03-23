@@ -1,0 +1,224 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="hero">
+  <p class="hero-label anim-1">{{ .Site.Params.homeHeroLabel | default "Independent Consultant" }}</p>
+  <h1 class="anim-2">{{ .Site.Params.homeHeroTitle | default "From problem to the solution that works." | safeHTML }}</h1>
+  <p class="hero-sub anim-3">{{ .Site.Params.homeHeroSubtitle | default .Site.Params.description }}</p>
+  <div class="hero-actions anim-4">
+    <a href="{{ .Site.Params.homeHeroCTAURL | default "/shopify/" }}" class="btn btn-primary">{{ .Site.Params.homeHeroCTA | default "View services →" }}</a>
+    <a href="{{ .Site.Params.homeHeroCTA2URL | default "/about/" }}" class="btn btn-ghost">{{ .Site.Params.homeHeroCTA2 | default "About me" }}</a>
+  </div>
+  {{ if .Site.Params.homeMetrics }}
+  <div class="hero-metrics anim-5">
+    {{ range .Site.Params.homeMetrics }}
+    <div class="metric">
+      <div class="metric-number">{{ .number }}</div>
+      <div class="metric-label">{{ .label | markdownify }}</div>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</div>
+
+{{/* ── SERVICES ── */}}
+{{ if .Site.Params.homeServices }}
+<div class="services-section">
+  <div class="services-inner">
+    <p class="section-label" style="color:#52b788;">{{ .Site.Params.homeServicesSectionLabel | default "Services" }}</p>
+    <h2 style="color:white;">{{ .Site.Params.homeServicesTitle | default "Three ways to work together." | safeHTML }}</h2>
+    {{ if .Site.Params.homeServicesIntro }}<p class="section-intro">{{ .Site.Params.homeServicesIntro }}</p>{{ end }}
+    <div class="services-grid">
+      {{ range .Site.Params.homeServices }}
+      <a href="{{ .url }}" class="service-card">
+        <div class="service-card-tag">{{ .tag }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+        {{ if .saving }}<div class="service-card-saving">{{ .saving }}</div>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+    {{ if .Site.Params.homeServicesCTA }}
+    <div class="services-cta">
+      <a href="{{ .Site.Params.homeServicesURL | default "/shopify/" }}" class="btn-green">{{ .Site.Params.homeServicesCTA }}</a>
+      {{ if .Site.Params.homeServicesPartnerNote }}
+      <span class="services-partner-note">{{ .Site.Params.homeServicesPartnerNote }}</span>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CONSULTING ── */}}
+<div class="section-wrap">
+  <p class="section-label">{{ .Site.Params.homeConsultingSectionLabel | default "Consulting" }}</p>
+  <div class="consulting-grid">
+    <div class="consulting-left">
+      <h2>{{ .Site.Params.homeConsultingTitle | default "Clarity to decide. Skill to execute." | safeHTML }}</h2>
+      {{ range .Site.Params.homeConsultingParagraphs }}<p>{{ . }}</p>{{ end }}
+      {{ if .Site.Params.homeConsultingChecks }}
+      <div class="problem-list">
+        {{ range .Site.Params.homeConsultingChecks }}
+        <div class="problem-item"><div class="problem-dot"></div>{{ . }}</div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ if .Site.Params.differentiators }}
+    <div class="differentials">
+      <h3>{{ .Site.Params.whyMeTitle | default (i18n "eyebrow_differentials") }}</h3>
+      {{ range .Site.Params.differentiators }}
+      <div class="diff-item">
+        <div class="diff-label">{{ .label }}</div>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+      <a href="{{ $.Site.Params.consultingURL | default "/consultoria/" }}" class="btn btn-primary" style="font-size:14px;padding:11px 22px;">{{ $.Site.Params.contactLabel | default (i18n "get_in_touch") }}</a>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+<hr class="divider container">
+
+{{/* ── PROJECTS ── */}}
+{{ $products := where .Site.RegularPages "Section" "produtos" }}
+{{ if or .Site.Params.homeVentures $products }}
+<div class="projetos-section">
+  <div class="projetos-inner">
+    <p class="section-label">{{ .Site.Params.homeProjectsSectionLabel | default "Projects & Products" }}</p>
+    <h2>{{ .Site.Params.homeProjectsTitle | default "Development and own products." | safeHTML }}</h2>
+    {{ if .Site.Params.homeProjectsIntro }}<p class="section-intro">{{ .Site.Params.homeProjectsIntro }}</p>{{ end }}
+    <div class="projetos-grid">
+      {{ with .Site.Params.homeVentures }}
+      {{ if .url }}<a href="{{ .url }}" class="projeto-card">{{ else }}<div class="projeto-card">{{ end }}
+        <div class="projeto-type">{{ .tag | default "Custom development" }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+        {{ if .badge }}<span class="project-status">{{ .badge }}</span>{{ end }}
+      {{ if .url }}</a>{{ else }}</div>{{ end }}
+      {{ end }}
+      {{ range $products }}
+      <a href="{{ .RelPermalink }}" class="projeto-card">
+        {{ with .Params.product_type }}<div class="projeto-type">{{ . }}</div>{{ end }}
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        {{ with .Params.status }}<span class="project-status">{{ . }}</span>{{ end }}
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── ABOUT ── */}}
+{{ if .Site.Params.homeAboutTitle }}
+<div class="section-wrap">
+  <p class="section-label">{{ .Site.Params.homeAboutSectionLabel | default "About" }}</p>
+  <div class="sobre-grid">
+    <div class="sobre-text">
+      <h2>{{ .Site.Params.homeAboutTitle | safeHTML }}</h2>
+      {{ range .Site.Params.homeAboutParagraphs }}<p>{{ . }}</p>{{ end }}
+      <a href="{{ $.Site.Params.homeAboutURL | default "/about/" }}" class="btn btn-ghost">{{ $.Site.Params.homeAboutCTA | default "Full story →" }}</a>
+    </div>
+    <div class="sobre-sidebar">
+      {{ if .Site.Params.location }}
+      <div class="sidebar-block">
+        <div class="sidebar-label">{{ i18n "about_based_in_label" | default "Based in" }}</div>
+        <p>{{ .Site.Params.location }}</p>
+      </div>
+      {{ end }}
+      {{ if .Site.Params.skills }}
+      <div class="sidebar-block">
+        <div class="sidebar-label">{{ i18n "about_skills_label" | default "Skills" }}</div>
+        <div class="sidebar-tags">
+          {{ range .Site.Params.skills }}<span class="tag">{{ . }}</span>{{ end }}
+        </div>
+      </div>
+      {{ end }}
+      {{ if .Site.Params.available }}
+      <div class="sidebar-block">
+        <div class="sidebar-label">{{ i18n "about_availability_label" | default "Availability" }}</div>
+        <p>{{ i18n "available_badge" | default "Open to new projects" }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<hr class="divider container">
+
+{{/* ── BLOG ── */}}
+{{ $posts := where .Site.RegularPages "Section" (.Site.Params.blogSection | default "blog") }}
+{{ if $posts }}
+<div class="section-wrap">
+  <p class="section-label">{{ .Site.Params.homeBlogSectionLabel | default "Blog" }}</p>
+  <h2>{{ .Site.Params.homeBlogTitle | default "Technical content without fluff." | safeHTML }}</h2>
+  {{ if .Site.Params.homeBlogIntro }}<p class="section-intro">{{ .Site.Params.homeBlogIntro }}</p>{{ end }}
+  <div class="blog-grid">
+    {{ range first 3 $posts }}
+    <a href="{{ .RelPermalink }}" class="blog-card">
+      {{ with .Params.categories }}{{ range first 1 . }}<div class="blog-cat">{{ . }}</div>{{ end }}{{ end }}
+      <h3>{{ .Title }}</h3>
+      <p>{{ .Description }}</p>
+    </a>
+    {{ end }}
+  </div>
+  {{ if .Site.Params.homeBlogCTA }}
+  <div style="margin-top:40px;">
+    <a href="{{ .Site.Params.homeBlogURL | default "/blog/" }}" class="btn btn-ghost">{{ .Site.Params.homeBlogCTA }}</a>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+{{/* ── CONTACT ── */}}
+<div class="contato-section">
+  <div class="contato-inner">
+    <div>
+      <h2>{{ .Site.Params.homeCTATitle | default "Have a project in mind?" | safeHTML }}</h2>
+      {{ if .Site.Params.homeCTADesc }}<p class="contato-desc">{{ .Site.Params.homeCTADesc }}</p>{{ end }}
+      <div class="contato-links">
+        {{ if .Site.Params.email }}
+        <a href="mailto:{{ .Site.Params.email }}" class="contato-link">
+          <div class="contato-link-icon">✉</div>
+          <span>{{ .Site.Params.email }}</span>
+        </a>
+        {{ end }}
+        {{ if .Site.Params.whatsapp }}
+        <a href="{{ .Site.Params.whatsapp }}" class="contato-link">
+          <div class="contato-link-icon">💬</div>
+          <span>WhatsApp</span>
+        </a>
+        {{ end }}
+        {{ if .Site.Params.linkedin }}
+        <a href="{{ .Site.Params.linkedin }}" class="contato-link">
+          <div class="contato-link-icon" style="font-size:12px;font-weight:700;">in</div>
+          <span>{{ .Site.Params.linkedin | replaceRE "https?://(www\\.)?" "" }}</span>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+    <div class="contato-form">
+      {{ if .Site.Params.contactFormSubtitle }}<p>{{ .Site.Params.contactFormSubtitle }}</p>{{ end }}
+      <div class="field">
+        <label>{{ .Site.Params.contactFieldName | default "Name" }}</label>
+        <input type="text" name="name" placeholder="{{ .Site.Params.contactFieldNamePlaceholder | default "Your name" }}">
+      </div>
+      <div class="field">
+        <label>{{ .Site.Params.contactFieldEmail | default "Email" }}</label>
+        <input type="email" name="email" placeholder="{{ .Site.Params.contactFieldEmailPlaceholder | default "your@email.com" }}">
+      </div>
+      <div class="field">
+        <label>{{ .Site.Params.contactFieldMessage | default "Message" }}</label>
+        <textarea name="message" placeholder="{{ .Site.Params.contactFieldMessagePlaceholder | default "Tell us about your project..." }}"></textarea>
+      </div>
+      <button type="submit" class="btn btn-white">{{ .Site.Params.contactSubmitBtn | default "Send →" }}</button>
+      {{ if .Site.Params.homeCTANote }}<p style="font-size:13px;color:rgba(255,255,255,0.35);font-weight:300;margin-top:12px;line-height:1.5;">{{ .Site.Params.homeCTANote }}</p>{{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}

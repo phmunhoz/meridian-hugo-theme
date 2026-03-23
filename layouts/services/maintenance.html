@@ -1,0 +1,138 @@
+{{ define "main" }}
+
+{{/* ── HERO (light/off-white) ── */}}
+<div class="maintenance-hero">
+  <div class="container">
+    <div class="maintenance-hero__inner">
+      <div>
+        <nav class="breadcrumb anim-1">
+          <a href="{{ .Site.Params.servicesURL | default "/shopify/" }}">{{ .Site.Params.servicesLabel | default "Services" }}</a>
+          <span class="breadcrumb__sep">/</span>
+          {{ .Title }}
+        </nav>
+        <p class="page-label anim-2">{{ .Site.Params.maintenancePageLabel | default "For teams already on the platform" }}</p>
+        <h1 class="anim-3">{{ .Site.Params.maintenanceHeroTitle | default "Your platform\ncan go further." | markdownify }}</h1>
+        <p class="about-hero__sub anim-4">{{ .Description }}</p>
+        <div class="hero__actions anim-5">
+          <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-primary">{{ i18n "btn_contact_arrow" }}</a>
+        </div>
+      </div>
+      <div class="maintenance-hero__checklist">
+        <p class="destaque-label" style="margin-bottom:20px;">{{ .Site.Params.maintenanceAreasLabel | default "Areas of focus" }}</p>
+        <div class="check-list">
+          {{ range .Site.Params.maintenanceAreas }}
+          <div class="check-item"><div class="check-item__dot"></div>{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* ── FEATURES / FRENTES ── */}}
+{{ if .Site.Params.maintenanceFeatures }}
+<div class="section" id="features">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.maintenanceWhatISectionLabel | default "What I do" }}</span>
+    <h2>{{ .Site.Params.maintenanceWhatITitle | default "Continuous evolution,\nnot one-off deliveries." | markdownify }}</h2>
+    {{ if .Site.Params.maintenanceWhatIIntro }}<p class="section__intro">{{ .Site.Params.maintenanceWhatIIntro }}</p>{{ end }}
+    <div class="maintenance-features">
+      {{ range .Site.Params.maintenanceFeatures }}
+      <div class="maintenance-feature card">
+        <div class="maintenance-feature__tag">{{ .tag }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+        {{ if .items }}
+        <div class="maintenance-feature__list">
+          {{ range .items }}
+          <div class="maintenance-feature__item"><div class="maintenance-feature__dot"></div>{{ . }}</div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<hr class="divider container">
+
+{{/* ── MODEL ── */}}
+<div class="section--off section">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.maintenanceModelSectionLabel | default "How I work" }}</span>
+    <div class="maintenance-model">
+      <div>
+        <h2>{{ .Site.Params.maintenanceModelTitle | default "Ongoing partnership,\nnot reactive support." | markdownify }}</h2>
+        {{ range .Site.Params.maintenanceModelParagraphs }}
+        <p style="font-size:16px;color:#555553;font-weight:300;line-height:1.85;margin-bottom:14px;">{{ . }}</p>
+        {{ end }}
+      </div>
+      {{ if .Site.Params.maintenanceProcess }}
+      <div class="maintenance-model__card">
+        <h3>{{ .Site.Params.maintenanceProcessTitle | default "How the engagement works in practice" }}</h3>
+        {{ range .Site.Params.maintenanceProcess }}
+        <div class="modelo-item">
+          <div class="modelo-check">✓</div>
+          <div class="modelo-item-text">
+            <h4>{{ .title }}</h4>
+            <p>{{ .desc }}</p>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── PLUS ── */}}
+{{ if .Site.Params.maintenancePlusFeatures }}
+<div class="section--dark section">
+  <div class="container">
+    <div class="maintenance-plus">
+      <div>
+        <span class="section-label section-label--green">{{ .Site.Params.maintenancePlusSectionLabel | default "Next level" }}</span>
+        <h2 style="color:white;">{{ .Site.Params.maintenancePlusTitle | default "When to upgrade\nto the enterprise tier." | markdownify }}</h2>
+        {{ if .Site.Params.maintenancePlusIntro }}
+        <p style="font-size:17px;color:rgba(255,255,255,0.5);font-weight:300;line-height:1.75;margin-top:14px;max-width:480px;">{{ .Site.Params.maintenancePlusIntro }}</p>
+        {{ end }}
+      </div>
+      <div>
+        <div class="maintenance-plus__features">
+          {{ range .Site.Params.maintenancePlusFeatures }}
+          <div class="maintenance-plus__feature">
+            <div class="maintenance-plus__icon">{{ .icon }}</div>
+            <div>
+              <strong style="font-size:14px;color:rgba(255,255,255,0.85);font-weight:500;display:block;margin-bottom:3px;">{{ .title }}</strong>
+              <span style="font-size:13px;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.6;">{{ .desc }}</span>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+        <a href="{{ $.Site.Params.contactURL | default "/contact/" }}" class="btn btn-green-accent" style="margin-top:32px;">{{ $.Site.Params.maintenancePlusCTA | default "Talk about upgrading →" }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ partial "cases-block.html" . }}
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Site.Params.maintenanceCTATitle | default "Your platform can deliver more." | markdownify }}</h2>
+        {{ if .Site.Params.maintenanceCTADesc }}<p class="cta-section__desc">{{ .Site.Params.maintenanceCTADesc }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-white">{{ i18n "btn_contact_arrow" }}</a>
+        {{ if .Site.Params.maintenanceCTANote }}<p class="cta-section__note">{{ .Site.Params.maintenanceCTANote }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

@@ -1,0 +1,161 @@
+{{ define "main" }}
+
+<div class="page-hero section--dark">
+  <div class="container">
+    <p class="page-label page-label--accent anim-1">{{ .Site.Params.servicesPageLabel | default "Services" }}</p>
+    <h1 class="anim-2" style="color:white;">{{ .Site.Params.servicesHeroTitle | default "Services that\ndeliver *results.*" | markdownify }}</h1>
+    <p class="service-hero__sub anim-3">{{ .Description | default .Site.Params.servicesHeroSubtitle }}</p>
+    <div class="hero__actions anim-4">
+      <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-green-accent">{{ .Site.Params.servicesHeroCTA | default "Talk about your project →" }}</a>
+      <a href="#how-it-works" class="btn btn-ghost-dark">{{ .Site.Params.servicesHeroCTA2 | default "How it works" }}</a>
+    </div>
+    {{ if .Site.Params.servicesMetrics }}
+    <div class="metric-strip metric-strip--dark anim-5">
+      {{ range .Site.Params.servicesMetrics }}
+      <div class="metric">
+        <div class="metric__number {{ if .accent }}metric__number--accent{{ else }}metric__number--white{{ end }}">{{ .number }}</div>
+        <div class="metric__label metric__label--dark">{{ .label | markdownify }}</div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+{{ if .Site.Params.partnerBarText }}
+<div class="partner-bar">
+  <div class="container">
+    <div class="partner-bar__inner">
+      <p>{{ .Site.Params.partnerBarText | markdownify }}</p>
+      {{ if .Site.Params.partnerBarLinkURL }}
+      <a href="{{ .Site.Params.partnerBarLinkURL }}" class="partner-bar__link">{{ .Site.Params.partnerBarLinkLabel | default "Talk about your project →" }}</a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ $servicePages := where .Site.RegularPages "Section" "shopify" }}
+{{ if $servicePages }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.servicesWhatISectionLabel | default "What I do" }}</span>
+    <h2>{{ .Site.Params.servicesWhatITitle | default "Ways to work together." | markdownify }}</h2>
+    {{ if .Site.Params.servicesWhatIIntro }}<p class="section__intro">{{ .Site.Params.servicesWhatIIntro }}</p>{{ end }}
+    <div class="service-items">
+      {{ range $servicePages }}
+      <a href="{{ .RelPermalink }}" class="service-item card">
+        {{ with .Params.tag }}<div class="service-item__tag">{{ . }}</div>{{ end }}
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        {{ if .Params.savings_min }}
+        <div class="service-item__saving">{{ $.Site.Params.typicalSavingsLabel | default "Economia típica:" }} {{ .Params.savings_min }}–{{ .Params.savings_max }}% {{ $.Site.Params.perYearLabel | default "ao ano" }}</div>
+        {{ else }}
+        <div class="service-item__saving">{{ $.Site.Params.continuousActuationLabel | default "Atuação contínua" }}</div>
+        {{ end }}
+        <div class="service-item__cta">{{ $.Site.Params.readMoreLabel | default "Ver mais →" }}</div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<hr class="divider container">
+
+{{ if .Site.Params.comparisonBefore }}
+<div class="section--off section">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.comparisonSectionLabel | default "Why migrate" }}</span>
+    <h2>{{ .Site.Params.comparisonTitle | default "The real cost of staying where you are." | markdownify }}</h2>
+    {{ if .Site.Params.comparisonIntro }}<p class="section__intro">{{ .Site.Params.comparisonIntro }}</p>{{ end }}
+    <div class="comparison">
+      <div class="comparison__col comparison__col--bad">
+        <h3>{{ .Site.Params.comparisonBeforeTitle | default "Before" }}</h3>
+        <div class="check-list">
+          {{ range .Site.Params.comparisonBefore }}
+          <div class="check-item"><span class="check-item__icon">✕</span>{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+      <div class="comparison__col comparison__col--good">
+        <h3>{{ .Site.Params.comparisonAfterTitle | default "After" }}</h3>
+        <div class="check-list">
+          {{ range .Site.Params.comparisonAfter }}
+          <div class="check-item"><span class="check-item__icon">✓</span>{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.servicesProcess }}
+<div class="section" id="how-it-works">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.servicesProcessSectionLabel | default "How it works" }}</span>
+    <h2>{{ .Site.Params.servicesProcessTitle | default "From discovery to go-live." | markdownify }}</h2>
+    {{ if .Site.Params.servicesProcessIntro }}<p class="section__intro">{{ .Site.Params.servicesProcessIntro }}</p>{{ end }}
+    <div class="processo-grid">
+      {{ range .Site.Params.servicesProcess }}
+      <div class="processo-step">
+        <div class="processo-num">{{ .num }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<hr class="divider container">
+
+{{ if .Site.Params.servicesDestaques }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.servicesDiferencialSectionLabel | default "Why me" }}</span>
+    <h2>{{ .Site.Params.servicesDiferencialTitle | default "Not just platform.\nBusiness results." | markdownify }}</h2>
+    {{ if .Site.Params.servicesDiferencialIntro }}<p class="section__intro">{{ .Site.Params.servicesDiferencialIntro }}</p>{{ end }}
+    <div class="destaques-grid">
+      {{ range .Site.Params.servicesDestaques }}
+      <div class="highlight-card">
+        <div class="destaque-label">{{ .label }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.faq }}
+<div class="section--off section" style="border-top:1px solid var(--gray-light);">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.faqSectionLabel | default "FAQ" }}</span>
+    <h2>{{ .Site.Params.faqTitle | default "Questions people ask." | markdownify }}</h2>
+    {{ partial "faq.html" . }}
+  </div>
+</div>
+{{ end }}
+
+{{ partial "cases-block.html" . }}
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Site.Params.servicesCTATitle | default "Ready to move forward?" | markdownify }}</h2>
+        {{ if .Site.Params.servicesCTADesc }}<p class="cta-section__desc">{{ .Site.Params.servicesCTADesc }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-white">{{ .Site.Params.contactLabel | default "Get in touch →" }}</a>
+        {{ if .Site.Params.servicesCTANote }}<p class="cta-section__note">{{ .Site.Params.servicesCTANote }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

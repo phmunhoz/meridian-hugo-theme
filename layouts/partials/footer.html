@@ -1,0 +1,19 @@
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+
+      <a href="/" class="footer__logo">
+        {{- .Site.Params.logo_text | default .Site.Title -}}
+      </a>
+
+      <p class="footer__loc">{{ .Site.Params.location }}</p>
+
+      <ul class="footer__links" role="list">
+        {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+
+    </div>
+  </div>
+</footer>

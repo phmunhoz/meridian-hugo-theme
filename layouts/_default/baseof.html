@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "pt-BR" }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {{/* Title */}}
+  <title>
+    {{- if .IsHome -}}
+      {{ .Site.Title }}
+    {{- else -}}
+      {{ .Title }} — {{ .Site.Params.author }}
+    {{- end -}}
+  </title>
+
+  {{/* Meta description */}}
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+  {{/* Open Graph */}}
+  <meta property="og:title"       content="{{ .Title }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:type"        content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url"         content="{{ .Permalink }}">
+  {{ $ogImage := .Params.image | default .Site.Params.ogImage }}
+  {{ with $ogImage }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+
+  {{/* Canonical */}}
+  <link rel="canonical" href="{{ .Permalink }}">
+
+  {{/* Favicon */}}
+  {{ with .Site.Params.favicon }}
+  <link rel="icon" type="image/svg+xml" href="{{ . }}">
+  {{ else }}
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  {{ end }}
+
+  {{/* Fonts */}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  {{/* CSS — bundle */}}
+  {{ $vars    := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . }}
+  {{ $main    := resources.Get "css/main.css" }}
+  {{ $home    := resources.Get "css/home.css" }}
+  {{ $pages   := resources.Get "css/pages.css" }}
+  {{ $layouts := resources.Get "css/layouts.css" }}
+  {{ $bundle := slice $vars $main $home $pages $layouts | resources.Concat "css/bundle.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}">
+
+  {{/* Google Analytics */}}
+  {{ if and hugo.IsProduction .Site.Params.googleAnalyticsID }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalyticsID }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ .Site.Params.googleAnalyticsID }}');
+  </script>
+  {{ end }}
+
+  {{/* Page-specific head */}}
+  {{ block "head" . }}{{ end }}
+</head>
+<body>
+
+  {{/* Navigation */}}
+  {{ partial "nav.html" . }}
+
+  {{/* Mobile menu */}}
+  {{ partial "nav-mobile.html" . }}
+
+  {{/* Main content */}}
+  <main id="main">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{/* Footer */}}
+  {{ partial "footer.html" . }}
+
+  {{/* JS global */}}
+  {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" defer></script>
+
+  {{/* Page-specific scripts */}}
+  {{ block "scripts" . }}{{ end }}
+
+</body>
+</html>

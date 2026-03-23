@@ -1,0 +1,24 @@
+{{ $cases := where .Site.RegularPages "Section" "cases" }}
+{{ if $cases }}
+<div class="section--off" style="border-top:1px solid var(--gray-light);">
+  <div class="container">
+    <div class="section">
+      <span class="section-label">{{ .Site.Params.casesSectionLabel | default "Cases" }}</span>
+      <h2>{{ .Site.Params.casesSectionTitle | default "Projects that happened." | markdownify }}</h2>
+      <div class="cases-block">
+        {{ range first 2 $cases }}
+        <a href="{{ .RelPermalink }}" class="case-card card">
+          {{ with .Params.case_type }}<div class="cat-label" style="margin-bottom:12px;">{{ . }}{{ with $.Params.sector }} · {{ . }}{{ end }}</div>{{ end }}
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Description }}</p>
+          <div class="case-card__footer">
+            <span class="case-card__meta">{{ with .Params.sector }}{{ . }}{{ end }}{{ with .Params.duration }} · {{ . }}{{ end }}</span>
+            <span class="case-card__link">{{ $.Site.Params.readMoreLabel | default "See case →" }}</span>
+          </div>
+        </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}

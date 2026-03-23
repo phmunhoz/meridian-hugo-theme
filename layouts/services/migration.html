@@ -1,0 +1,195 @@
+{{ define "main" }}
+{{ $plat := .Params.platform | default "Plataforma" }}
+{{ $eMin := .Params.savings_min | default "30" }}
+{{ $eMax := .Params.savings_max | default "70" }}
+
+{{/* ── HERO ── */}}
+<div class="page-hero section--dark">
+  <div class="container">
+    <div class="migration-hero__grid">
+      <div>
+        <nav class="breadcrumb breadcrumb--dark anim-1">
+          <a href="{{ .Site.Params.servicesURL | default "/shopify/" }}">Shopify</a>
+          <span class="breadcrumb__sep">/</span>
+          {{ i18n "service_migration_tag" }} · {{ $plat }}
+        </nav>
+        <p class="page-label page-label--accent anim-2">{{ i18n "service_migration_tag" }}</p>
+        <h1 class="anim-3" style="color:white;">{{ $plat }} para<br><em>Shopify.</em></h1>
+        <p class="service-hero__sub anim-4">{{ .Description }}</p>
+        <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-green-accent anim-5">{{ i18n "btn_migrate" }}</a>
+      </div>
+      {{ if .Params.stat_cards }}
+      <div class="migration-hero__stats">
+        {{ range .Params.stat_cards }}
+        <div class="stat-card">
+          <div class="stat-number">{{ .number }}</div>
+          <div class="stat-label">{{ .label }}</div>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── SINAIS ── */}}
+{{ if .Params.sinais }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Params.sinais_label | default "Quando faz sentido migrar" }}</span>
+    <h2>{{ .Params.sinais_title | default "" | markdownify }}</h2>
+    {{ if .Params.sinais_intro }}<p class="section__intro">{{ .Params.sinais_intro }}</p>{{ end }}
+    <div class="sinais-grid">
+      {{ range .Params.sinais }}
+      <div class="sinal-item">
+        <span class="signal-icon">{{ .icon }}</span>
+        <div class="sinal-text">
+          <strong>{{ .title }}</strong>
+          <span>{{ .desc }}</span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<hr class="divider container">
+
+{{/* ── DELIVERS ── */}}
+{{ if .Params.delivers }}
+<div class="section--off section">
+  <div class="container">
+    <span class="section-label">{{ .Params.delivers_label | default "O que a migração entrega" }}</span>
+    <h2>{{ .Params.delivers_title | default "" | markdownify }}</h2>
+    {{ if .Params.delivers_intro }}<p class="section__intro">{{ .Params.delivers_intro }}</p>{{ end }}
+    <div class="jogo-grid">
+      {{ range .Params.delivers }}
+      <div class="step-card">
+        <div class="step-card-num">{{ .num }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── DIVIDA (Magento) ── */}}
+{{ if .Params.divida }}
+<div class="section--off section">
+  <div class="container">
+    <span class="section-label">{{ .Params.divida_label | default "O problema" }}</span>
+    <h2>{{ .Params.divida_title | markdownify }}</h2>
+    {{ if .Params.divida_intro }}<p class="section__intro">{{ .Params.divida_intro }}</p>{{ end }}
+    <div class="divida-grid">
+      {{ range .Params.divida }}
+      <div class="divida-item">
+        <div class="divida-item-label">{{ .label }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── COMPARATIVO (Magento) ── */}}
+{{ if .Params.mig_before }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Params.mig_comparison_label | default "Por que Shopify" }}</span>
+    <h2>{{ .Params.mig_comparison_title | markdownify }}</h2>
+    {{ if .Params.mig_comparison_intro }}<p class="section__intro">{{ .Params.mig_comparison_intro }}</p>{{ end }}
+    <div class="comparison">
+      <div class="comparison__col comparison__col--bad">
+        <h3>{{ .Params.mig_before_title | default "Antes" }}</h3>
+        <div class="check-list">
+          {{ range .Params.mig_before }}
+          <div class="check-item"><span class="check-item__icon">✕</span>{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+      <div class="comparison__col comparison__col--good">
+        <h3>{{ .Params.mig_after_title | default "Com Shopify" }}</h3>
+        <div class="check-list">
+          {{ range .Params.mig_after }}
+          <div class="check-item"><span class="check-item__icon">✓</span>{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr class="divider container">
+{{ end }}
+
+{{/* ── PROCESS ── */}}
+{{ if .Params.steps }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Params.process_label | default "Como funciona" }}</span>
+    <h2>{{ .Params.process_title | default "" | markdownify }}</h2>
+    {{ if .Params.process_intro }}<p class="section__intro">{{ .Params.process_intro }}</p>{{ end }}
+    <div class="process-list">
+      {{ range .Params.steps }}
+      <div class="processo-item">
+        <div class="processo-num">{{ .num }}</div>
+        <div class="processo-content">
+          <h3>{{ .title }}</h3>
+          <p>{{ .desc }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<hr class="divider container">
+
+{{/* ── SCOPE ── */}}
+{{ if .Params.scope_cols }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Params.scope_label | default "O que está incluso" }}</span>
+    <h2>{{ .Params.scope_title | default "" | markdownify }}</h2>
+    {{ if .Params.scope_intro }}<p class="section__intro">{{ .Params.scope_intro }}</p>{{ end }}
+    <div class="escopo-grid">
+      {{ range .Params.scope_cols }}
+      <div class="escopo-col">
+        <h3>{{ .title }}</h3>
+        <div class="scope-list">
+          {{ range .items }}
+          <div class="escopo-item"><div class="escopo-dot"></div>{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── CASES ── */}}
+{{ partial "cases-block.html" . }}
+
+{{/* ── CTA ── */}}
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Params.cta_title | default (i18n "service_cta_title") }}</h2>
+        {{ with .Params.cta_desc }}<p class="cta-section__desc">{{ . }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-white">{{ i18n "btn_contact_arrow" }}</a>
+        {{ with .Params.cta_note }}<p class="cta-section__note">{{ . }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

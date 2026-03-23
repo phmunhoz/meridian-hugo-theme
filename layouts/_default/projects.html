@@ -1,0 +1,150 @@
+{{ define "main" }}
+
+<div class="page-hero section">
+  <div class="container">
+    <p class="page-label anim-1">{{ .Site.Params.projectsPageLabel | default "Projects" }}</p>
+    <h1 class="anim-2">{{ .Site.Params.projectsHeroTitle | default "From zero to the product\nthat *stands on its own.*" | markdownify }}</h1>
+    <p class="about-hero__sub anim-3" style="max-width:620px;">{{ .Description | default .Site.Params.description }}</p>
+  </div>
+</div>
+
+<hr class="divider container">
+
+{{ if .Site.Params.venturesSection }}
+<div class="section--dark section">
+  <div class="container">
+    <span class="section-label section-label--green">{{ .Site.Params.venturesSectionLabel | default "Custom development" }}</span>
+    <h2 style="color:white;">{{ .Site.Params.venturesTitle | markdownify }}</h2>
+    {{ if .Site.Params.venturesIntro }}<p class="section__intro" style="color:rgba(255,255,255,0.5);">{{ .Site.Params.venturesIntro }}</p>{{ end }}
+    <div class="ventures-grid">
+      <div class="ventures-desc">
+        {{ range .Site.Params.venturesParagraphs }}
+        <p>{{ . }}</p>
+        {{ end }}
+        {{ if .Site.Params.venturesProcess }}
+        <div class="ventures-model">
+          <p class="ventures-model__label">{{ $.Site.Params.venturesProcessLabel | default "Engagement model" }}</p>
+          <div class="process-list">
+            {{ range .Site.Params.venturesProcess }}
+            <div class="process-item" style="border-color:rgba(255,255,255,0.08);">
+              <div class="process-item__num" style="color:var(--green-accent);">{{ .num }}</div>
+              <div class="process-item__content">
+                <h3 style="color:white;font-size:17px;">{{ .title }}</h3>
+                <p style="color:rgba(255,255,255,0.45);">{{ .desc }}</p>
+              </div>
+            </div>
+            {{ end }}
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      <div class="ventures-cards">
+        {{ range .Site.Params.venturesCards }}
+        <div class="ventures-card{{ if .muted }} ventures-card--muted{{ end }}">
+          {{ if .tag }}<div class="ventures-card__tag">{{ .tag }}</div>{{ end }}
+          <h3>{{ .title }}</h3>
+          <p>{{ .desc }}</p>
+          {{ if .badge }}<div class="badge" style="background:rgba(82,183,136,0.15);color:var(--green-accent);margin-top:16px;">{{ .badge }}</div>{{ end }}
+          {{ if .url }}<a href="{{ .url }}" class="ventures-card__link">{{ .cta | default "See case →" }}</a>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ $products := where .Site.RegularPages "Section" "produtos" }}
+{{ if $products }}
+<div class="section--off section" style="border-top:1px solid var(--gray-light);">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.ownProductsLabel | default "Own products" }}</span>
+    <h2>{{ .Site.Params.ownProductsTitle | default "Digital assets with\nscale potential." | markdownify }}</h2>
+    {{ if .Site.Params.ownProductsIntro }}<p class="section__intro">{{ .Site.Params.ownProductsIntro }}</p>{{ end }}
+    {{ $featured := index $products 0 }}
+    {{ if $featured }}
+    <div class="product-featured">
+      <div class="product-featured__left">
+        {{ with $featured.Params.product_type }}<div class="cat-label" style="margin-bottom:16px;">{{ . }} · {{ $.Site.Params.featuredProductLabel | default "Most mature" }}</div>{{ end }}
+        <h3>{{ $featured.Title }}</h3>
+        <p>{{ $featured.Description }}</p>
+        <div class="product-featured__actions">
+          {{ if $featured.Params.status }}<div class="product-status">{{ $featured.Params.status }}</div>{{ end }}
+          <a href="{{ $featured.RelPermalink }}" class="btn btn-primary btn-sm">{{ $.Site.Params.readMoreLabel | default "Learn more →" }}</a>
+        </div>
+      </div>
+      {{ if $featured.Params.metrics }}
+      <div class="product-featured__right">
+        <p class="produto-featured-right-label">{{ $.Site.Params.currentTractionLabel | default "Current traction" }}</p>
+        <div class="product-metrics">
+          {{ range $featured.Params.metrics }}
+          <div class="product-featured-metric">
+            <div class="product-featured-metric__num">{{ .number }}</div>
+            <div class="product-featured-metric__label">{{ .label }}</div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ if gt (len $products) 1 }}
+    <div class="produtos-grid">
+      {{ range after 1 $products }}
+      <div class="produto-card">
+        {{ with .Params.product_type }}<div class="produto-card-tag">{{ . }}</div>{{ end }}
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        {{ if .Params.card_meta }}
+        <div class="produto-card-meta">
+          {{ range .Params.card_meta }}
+          <div class="produto-meta-item"><div class="produto-meta-dot"></div>{{ . }}</div>
+          {{ end }}
+        </div>
+        {{ end }}
+        {{ if .Params.status }}<div class="produto-card-status">{{ .Params.status }}</div>{{ end }}
+        <a href="{{ .RelPermalink }}" class="produto-card-link">{{ $.Site.Params.readMoreLabel | default "Learn more →" }}</a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+{{ if .Site.Params.projectsPhilosophy }}
+<div class="section">
+  <div class="container">
+    <span class="section-label">{{ .Site.Params.projectsPhilosophyLabel | default "How I think about projects" }}</span>
+    <h2>{{ .Site.Params.projectsPhilosophyTitle | default "Projects that don't end at delivery." | markdownify }}</h2>
+    {{ if .Site.Params.projectsPhilosophyIntro }}<p class="section__intro">{{ .Site.Params.projectsPhilosophyIntro }}</p>{{ end }}
+    <div class="about-differentiators">
+      {{ range .Site.Params.projectsPhilosophy }}
+      <div class="about-differentiator">
+        <div class="about-differentiator__num">{{ .num }}</div>
+        <h3>{{ .title }}</h3>
+        <p>{{ .desc }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-section__inner">
+      <div>
+        <h2>{{ .Site.Params.projectsCTATitle | default "Have a problem that needs a solution that doesn't exist yet?" | markdownify }}</h2>
+        {{ if .Site.Params.projectsCTADesc }}<p class="cta-section__desc">{{ .Site.Params.projectsCTADesc }}</p>{{ end }}
+      </div>
+      <div class="cta-section__actions">
+        <a href="{{ .Site.Params.contactURL | default "/contact/" }}" class="btn btn-white">{{ .Site.Params.contactLabel | default "Get in touch →" }}</a>
+        <a href="{{ .Site.Params.consultingURL | default "/consulting/" }}" class="btn btn-ghost-dark">{{ .Site.Params.projectsCTABtn2 | default "View consulting" }}</a>
+        {{ if .Site.Params.projectsCTANote }}<p class="cta-section__note">{{ .Site.Params.projectsCTANote }}</p>{{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

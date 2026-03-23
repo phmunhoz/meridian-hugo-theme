@@ -1,0 +1,185 @@
+# ── NAVIGATION ──────────────────────────────────
+nav_skip = "Pular para o conteúdo"
+
+# ── COMMON ACTIONS ───────────────────────────────
+read_more = "Leia mais →"
+view_case = "Ver case →"
+view_all_cases = "Ver todos os cases →"
+see_all = "Ver todos →"
+get_in_touch = "Fale comigo →"
+learn_more = "Saiba mais →"
+access_product = "Acessar {{ .Name }} →"
+
+# ── COMMON LABELS ────────────────────────────────
+label_cases = "Cases"
+label_blog = "Blog"
+label_services = "Shopify"
+label_products = "Produtos"
+label_about = "Sobre"
+label_projects = "Projetos"
+label_consulting = "Consultoria"
+label_contact = "Contato"
+label_section_cases = "Cases"
+label_section_blog = "Blog"
+label_new = "Novo"
+
+# ── SECTION EYEBROWS ─────────────────────────────
+eyebrow_cases = "Cases"
+eyebrow_services = "Shopify Partner"
+eyebrow_about = "Sobre"
+eyebrow_consulting = "Consultoria"
+eyebrow_projects = "Projetos & Produtos"
+eyebrow_contact = "Contato"
+eyebrow_blog = "Blog"
+eyebrow_how_it_works = "Como funciona"
+eyebrow_differentials = "Como trabalho"
+eyebrow_testimonials = "O que dizem"
+eyebrow_selected_work = "Trabalho selecionado"
+eyebrow_faq = "Dúvidas frequentes"
+eyebrow_next_level = "Próximo nível"
+eyebrow_background = "Trajetória"
+eyebrow_process = "Processo"
+
+# ── AVAILABILITY ─────────────────────────────────
+available_badge = "Aberto a novos projetos"
+not_available_badge = "Não aceitando novos clientes"
+
+# ── PARTNER BAR ──────────────────────────────────
+partner_bar_text = "<strong>Shopify Partner certificado:</strong> acesso a suporte direto da Shopify e recursos exclusivos de desenvolvimento — vantagem real na hora de executar."
+partner_bar_cta = "Fale sobre seu projeto →"
+
+# ── BLOG ─────────────────────────────────────────
+blog_filter_label = "Filtrar"
+blog_filter_all = "Todos"
+blog_min_read = "min de leitura"
+blog_prev = "← Mais recentes"
+blog_next = "Mais antigos →"
+blog_breadcrumb = "Blog"
+blog_sidebar_cta_title = "Tem um projeto nessa área?"
+blog_sidebar_cta_body = "Começamos com uma conversa. Sem compromisso."
+blog_sidebar_cta_link = "Ver serviços →"
+blog_post_prev = "← Anterior"
+blog_post_next = "Próximo →"
+blog_recent_label = "Artigos recentes"
+blog_img_placeholder = "imagem do post"
+blog_share_label = "Compartilhar"
+blog_toc_label = "Neste artigo"
+blog_sidebar_cta_question = "Quer ajuda com isso?"
+blog_related_label = "Artigos relacionados"
+blog_author_role = "Consultor Independente"
+
+# ── CASES ────────────────────────────────────────
+case_breadcrumb_label = "Cases"
+case_duration_label = "Duração"
+case_role_label = "Atuação"
+case_sector_label = "Setor"
+case_size_label = "Porte"
+case_platform_from_label = "De"
+case_platform_to_label = "Para"
+case_metric_strip_title = "Resultados"
+case_cta_title = "Sua operação tem um perfil parecido?"
+case_cta_body = "Começamos com uma conversa sobre como está sua operação hoje. Sem compromisso — eu digo com honestidade se e como posso ajudar."
+case_cta_link = "Ver serviços"
+
+# ── PRODUCTS ─────────────────────────────────────
+product_breadcrumb_label = "Produtos"
+product_screenshot_placeholder = "screenshot do produto"
+product_creator_label = "Feito por quem usa isso no dia a dia."
+product_creator_cta = "Conheça minha trajetória →"
+product_cta_title = "Pronto para experimentar?"
+product_cta_body = "Comece com o plano gratuito. Se tiver alguma dúvida, fale comigo diretamente."
+product_try_free = "Testar grátis →"
+product_contact_link = "Fale comigo →"
+product_traction_label = "Tração"
+product_developed_by = "Desenvolvido por"
+product_creator_origin = "nasceu de uma dor real encontrada em projetos reais de e-commerce."
+
+# ── CONTACT ──────────────────────────────────────
+contact_availability_label = "Disponibilidade"
+contact_email_label = "E-mail"
+contact_whatsapp_label = "WhatsApp"
+contact_whatsapp_cta = "Chamar no WhatsApp"
+contact_whatsapp_sub = "Para assuntos mais urgentes"
+contact_linkedin_label = "LinkedIn"
+contact_linkedin_sub = "Conecte-se por lá também"
+contact_project_types_label = "Tipos de projeto"
+contact_how_label = "Como funciona"
+contact_no_commitment_label = "Sem compromisso inicial"
+contact_location_label = "Baseado em"
+
+# Contact form
+form_name = "Nome"
+form_name_placeholder = "Seu nome"
+form_company = "Empresa"
+form_company_placeholder = "Onde trabalha (opcional)"
+form_email = "E-mail"
+form_email_placeholder = "seu@email.com"
+form_subject = "Assunto"
+form_subject_placeholder = "Sobre o que quer falar?"
+form_message = "Mensagem"
+form_message_placeholder = "Conta um pouco sobre a situação atual, o que está buscando e qualquer contexto relevante..."
+form_send = "Enviar mensagem →"
+form_note = "Respondo em até 24h. Sem spam, sem repasse para terceiros."
+form_success_icon = "✓"
+form_success_title = "Mensagem enviada."
+form_success_body = "Recebi sua mensagem e respondo em até 24h. Se for urgente, chama no WhatsApp."
+
+# ── ABOUT ────────────────────────────────────────
+about_based_in_label = "Baseado em"
+about_background_label = "Trajetória"
+about_skills_label = "Especialidades"
+about_education_label = "Formação"
+about_recognition_label = "Reconhecimento"
+about_availability_label = "Disponibilidade"
+about_cases_label = "Cases"
+about_products_label = "Produtos"
+about_photo_caption = "{{ .Site.Params.author }} · {{ .Site.Params.location }}"
+
+# ── SERVICES ─────────────────────────────────────
+service_economy_label = "Economia típica"
+service_continuous_label = "Atuação contínua"
+service_downtime_label = "0h de downtime"
+service_next_step = "Ver mais →"
+service_migration_tag = "Migração"
+service_maintenance_tag = "Evolução"
+service_before_title = "Hoje"
+service_after_title = "Com a mudança"
+service_process_title = "Do diagnóstico ao go-live."
+service_process_intro = "A loja atual segue rodando normalmente durante toda a migração — a virada acontece em janela controlada."
+service_step_1_title = "Auditoria e diagnóstico"
+service_step_2_title = "Arquitetura"
+service_step_3_title = "Construção em paralelo"
+service_step_4_title = "Validação e go-live"
+service_cta_title = "Quer entender se a migração faz sentido para a sua operação?"
+service_cta_body = "Começamos com uma conversa sem compromisso. Você conta como está a operação hoje — eu digo, com honestidade, se e como a migração faz sentido."
+service_faq_title = "Perguntas que todo mundo faz."
+
+# Maintenance
+maintenance_how_title = "Atuação contínua,\nnão por chamado."
+maintenance_how_body_1 = "Não funciono como suporte reativo — onde você abre um ticket e espera. A ideia é uma relação de trabalho próxima, onde entendo o negócio em profundidade e consigo antecipar problemas e oportunidades."
+maintenance_how_body_2 = "A maioria dos clientes que começa nesse modelo acaba expandindo naturalmente — novas integrações, ampliação de funcionalidades, e muitas vezes o crescimento para o tier enterprise quando o volume justifica."
+maintenance_model_title = "Como a atuação funciona na prática"
+maintenance_plus_cta = "Avançar para o tier enterprise →"
+
+# ── NEWSLETTER ───────────────────────────────────
+newsletter_eyebrow = "Newsletter"
+newsletter_email_placeholder = "seu@email.com"
+newsletter_subscribe = "Assinar →"
+newsletter_note = "Cancele quando quiser."
+
+# ── FOOTER ───────────────────────────────────────
+footer_rights = "Todos os direitos reservados."
+
+# ── PAGINATION ───────────────────────────────────
+pagination_prev = "← Mais recentes"
+pagination_next = "Mais antigos →"
+
+# ── BREADCRUMB ───────────────────────────────────
+breadcrumb_home = "Início"
+
+# ── BOTÕES ───────────────────────────────────────
+btn_contact = "Fale comigo"
+btn_contact_arrow = "Fale comigo →"
+btn_migrate = "Quero migrar →"
+btn_how_it_works = "Como funciona"
+btn_learn_more = "Saiba mais →"

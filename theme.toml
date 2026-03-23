@@ -1,0 +1,13 @@
+name = "Meridian"
+license = "MIT"
+licenselink = "https://github.com/phmunhoz/hugo-theme-meridian/blob/main/LICENSE"
+description = "Minimal Hugo theme for independent consultants and technology professionals. Mobile-first, no external dependencies beyond Google Fonts."
+homepage = "https://github.com/phmunhoz/hugo-theme-meridian"
+tags = ["minimal", "consultant", "portfolio", "blog", "ecommerce", "responsive"]
+features = ["blog", "portfolio", "cases", "products", "contact-form", "dark-sections"]
+min_version = "0.120.0"
+
+[author]
+  name  = "PH Munhoz"
+  email = "ph@ph.etc.br"
+  homepage = "https://github.com/phmunhoz/hugo-theme-meridian"
