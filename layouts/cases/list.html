@@ -1,0 +1,36 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="blog-header">
+  <div class="container">
+    <div class="blog-header__inner">
+      <div>
+        <p class="page-label anim-1">{{ i18n "eyebrow_cases" }}</p>
+        <h1 class="anim-2">{{ .Title | default "Cases" }}</h1>
+      </div>
+      {{ with .Description }}<p class="blog-header__sub anim-3">{{ . }}</p>{{ end }}
+      {{ with .Content }}<div class="blog-header__intro anim-4">{{ . }}</div>{{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* ── CASES GRID ── */}}
+<div class="blog-grid-wrap section" style="padding-block-start: 2rem;">
+  <div class="container">
+    <div class="cases-block">
+      {{ range .Pages }}
+      <a href="{{ .RelPermalink }}" class="case-card card">
+        {{ with .Params.case_type }}<div class="cat-label" style="margin-bottom:12px;">{{ . }}{{ with $.Params.sector }} · {{ . }}{{ end }}</div>{{ end }}
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        <div class="case-card__footer">
+          <span class="case-card__meta">{{ with .Params.sector }}{{ . }}{{ end }}{{ with .Params.duration }} · {{ . }}{{ end }}</span>
+          <span class="case-card__link">{{ $.Site.Params.readMoreLabel | default "Ver case →" }}</span>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}
