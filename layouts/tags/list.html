@@ -1,0 +1,29 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="blog-header">
+  <div class="container">
+    <div class="blog-header__inner">
+      <div>
+        <p class="page-label anim-1">Temas</p>
+        <h1 class="anim-2">{{ .Title }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* ── TAG LIST ── */}}
+<div class="blog-grid-wrap section">
+  <div class="container">
+    <span class="section-label">{{ len .Data.Terms }} temas</span>
+    <div class="blog-filters__bar" style="flex-wrap:wrap; gap: 8px; margin-top: 1.5rem;">
+      {{ range .Data.Terms.Alphabetical }}
+      <a href="{{ .Page.RelPermalink }}" class="filter-tag">
+        {{ .Page.Title }} <span style="opacity:.55; font-size:.85em;">({{ .Count }})</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}

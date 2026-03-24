@@ -1,0 +1,51 @@
+{{ define "main" }}
+
+{{/* ── HERO ── */}}
+<div class="blog-header">
+  <div class="container">
+    <div class="blog-header__inner">
+      <div>
+        <nav class="breadcrumb anim-1">
+          <a href="{{ .Site.Params.blogURL | default "/artigos/" }}">{{ i18n "eyebrow_blog" }}</a>
+          <span class="breadcrumb__sep">/</span>
+          <a href="/tema/">Temas</a>
+          <span class="breadcrumb__sep">/</span>
+          <span>{{ .Title }}</span>
+        </nav>
+        <h1 class="anim-2">{{ .Title }}</h1>
+      </div>
+      <p class="blog-header__sub anim-3">{{ len .Pages }} {{ if eq (len .Pages) 1 }}artigo{{ else }}artigos{{ end }}</p>
+    </div>
+  </div>
+</div>
+
+{{/* ── POSTS GRID ── */}}
+<div class="blog-grid-wrap section">
+  <div class="container">
+    <div class="grid-3 blog-posts-grid">
+      {{ range .Pages }}
+      <a href="{{ .RelPermalink }}" class="blog-post-card">
+        <div class="blog-post-card__img">
+          {{ with .Params.image }}
+          <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+          {{ else }}
+          <span class="blog-post-card__placeholder">{{ i18n "blog_img_placeholder" }}</span>
+          {{ end }}
+        </div>
+        <div class="blog-post-card__meta">
+          <span class="cat-label">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
+          <span class="blog-post-card__date">{{ .Date.Format "2 Jan 2006" }}</span>
+        </div>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description }}</p>
+        <div class="blog-post-card__footer">
+          <span class="blog-post-card__time">{{ .ReadingTime }} {{ i18n "blog_min_read" }}</span>
+          <span class="blog-post-card__arrow">→</span>
+        </div>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{ end }}
