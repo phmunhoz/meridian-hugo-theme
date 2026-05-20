@@ -16,12 +16,14 @@
 
         <div class="product-hero__actions anim-5">
           {{ if .Params.external_url }}
-          <a href="{{ .Params.external_url }}" class="btn btn-primary" target="_blank" rel="noopener">{{ i18n "access_product" (dict "Name" $.Title) }}</a>
+          <a href="{{ .Params.external_url }}" class="btn btn-primary" target="_blank" rel="noopener">{{ .Params.hero_cta_primary_label | default (i18n "access_product" (dict "Name" $.Title)) }}</a>
           {{ else }}
-          <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-primary">{{ i18n "btn_contact_arrow" | default "Fale comigo →" }}</a>
+          <a href="{{ .Site.Params.contactURL | default "/contato/" }}" class="btn btn-primary">{{ .Params.hero_cta_primary_label | default (i18n "btn_contact_arrow" | default "Fale comigo →") }}</a>
           {{ end }}
-          {{ if .Params.how_steps }}
-          <a href="#como-funciona" class="btn btn-ghost">{{ i18n "btn_how_it_works" | default "Como funciona" }}</a>
+          {{ if .Params.hero_cta_secondary_url }}
+          <a href="{{ .Params.hero_cta_secondary_url }}" class="btn btn-ghost" target="_blank" rel="noopener">{{ .Params.hero_cta_secondary_label | default (i18n "btn_learn_more" | default "Saiba mais") }}</a>
+          {{ else if .Params.how_steps }}
+          <a href="#como-funciona" class="btn btn-ghost">{{ .Params.hero_cta_secondary_label | default (i18n "btn_how_it_works" | default "Como funciona") }}</a>
           {{ end }}
         </div>
 
