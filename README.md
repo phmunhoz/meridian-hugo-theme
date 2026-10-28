@@ -13,6 +13,9 @@ A minimal Hugo theme for independent consultants and technology professionals. M
 - Dark and light section support ("sandwich" structure)
 - **Parameterized color palette** — override any color from `hugo.toml` without touching the theme
 - Native blog with TOC, categories, tags, prev/next and reading time
+- SEO for posts — custom `<title>`, Open Graph, Twitter Card, `BlogPosting` and `FAQPage` JSON-LD, "updated on" date
+- Responsive Markdown tables and external links opening in a new tab (render hooks)
+- `rel="alternate"` links for every alternative output format (RSS, Markdown for LLMs, etc.)
 - Templates for consulting, services, case studies and product pages
 - FAQ accordion (vanilla JS)
 - Contact form with validation and success state
@@ -135,7 +138,10 @@ layouts/
 ├── index.html                  # Home
 ├── 404.html                    # Not found page
 ├── _default/
-│   ├── baseof.html             # Base layout (GA4, favicon, CSS bundle, OG tags)
+│   ├── baseof.html             # Base layout (GA4, favicon, CSS bundle, OG/Twitter tags, alternate links)
+│   ├── _markup/
+│   │   ├── render-link.html    # External links get target="_blank" rel="noopener"
+│   │   └── render-table.html   # Wraps tables in a horizontally scrollable container (Hugo 0.134+)
 │   ├── single.html             # Generic page fallback
 │   ├── about.html              # /about
 │   ├── consulting.html         # /consulting
@@ -159,7 +165,9 @@ layouts/
 │   ├── footer.html
 │   ├── newsletter.html
 │   ├── faq.html
-│   └── cases-block.html        # Reusable 2-column cases block
+│   ├── cases-block.html        # Reusable 2-column cases block
+│   └── seo/
+│       └── article.html        # Post <head>: article dates, BlogPosting and FAQPage JSON-LD
 └── shortcodes/
     ├── callout.html            # {{< callout >}} text {{< /callout >}}
     ├── cta.html                # {{< cta title="" btn="" url="" >}}
@@ -184,6 +192,40 @@ Meridian uses Hugo's `type` field (not `layout`) to route content to the correct
 | Product         | `"products"`           | `content/products/`     |
 
 Root pages (`about`, `consulting`, etc.) are routed by filename via `_default/` layouts — no `type` needed.
+
+## Blog post front matter
+
+Besides Hugo's standard fields (`title`, `date`, `lastmod`, `description`, `categories`, `tags`), blog posts accept:
+
+```yaml
+---
+title: "Headline shown on the page"
+seoTitle: "Shorter or keyword-focused <title>"  # optional; used as-is, without the " — Author" suffix
+date: 2026-10-28
+lastmod: 2026-11-15
+showLastmod: true          # optional; see below
+description: "Meta description, OG and Twitter description, JSON-LD description"
+image: "/img/posts/cover.svg"   # cover shown on the post and in the listing
+ogImage: "/img/posts/cover.png" # optional; social preview image (takes precedence over image)
+faq: true                  # optional; emits FAQPage JSON-LD from the post's FAQ section
+faqAnchor: "frequently-asked-questions"  # optional; id of the FAQ h2 (default "perguntas-frequentes")
+---
+```
+
+- **`seoTitle`** — replaces the `<title>` tag only. `og:title`, `twitter:title`, the JSON-LD `headline` and the `<h1>` keep using `title`.
+- **`ogImage`** — social networks (LinkedIn, WhatsApp, X, Facebook) don't render SVG, which is a common format for covers. Point `ogImage` to a PNG or JPG (1200×630 recommended). Fallback order: `ogImage` → `image` → site `ogImage` param.
+- **Updated date** — "Updated on DD/MM/YYYY" appears below the title when `lastmod` differs from `date`. Hugo fills `lastmod` with `date` when it's missing, so a post published and updated on the same day needs `showLastmod: true` to show the line.
+- **`faq`** — the FAQ is read from the rendered content, so the JSON-LD always matches the page: the section starts at the `<h2>` whose id is `faqAnchor` and ends at the next `<h2>`; each `<h3>` is a question and everything until the next `<h3>` is its answer. Hugo builds the id from the heading text (`## Frequently asked questions` → `frequently-asked-questions`). If the heading isn't found, the build prints a warning and no FAQPage is emitted.
+
+```markdown
+## Frequently asked questions
+
+### Can I reinstall the app?
+
+No. It's no longer available on the App Store.
+```
+
+Every post also gets `article:published_time`, `article:modified_time` and a `BlogPosting` JSON-LD block (author from the `author` and `linkedin` site params, language from `languageCode`).
 
 ## New content
 
