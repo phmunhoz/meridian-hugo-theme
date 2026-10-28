@@ -67,6 +67,8 @@ blog_toc_label = "In this article"
 blog_sidebar_cta_question = "Need help with this?"
 blog_related_label = "Related articles"
 blog_author_role = "Independent Consultant"
+blog_updated_on = "Updated on"
+blog_updated_format = "01/02/2006"
 
 # ── CASES ────────────────────────────────────────
 case_breadcrumb_label = "Cases"

@@ -1,0 +1,44 @@
+{{- /* Metadados de artigo para o <head>: datas do Open Graph, JSON-LD de
+     BlogPosting e, se o post tiver `faq: true`, JSON-LD de FAQPage. */ -}}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">
+<meta property="article:modified_time"  content="{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}">
+
+{{- $author := dict "@type" "Person" "name" .Site.Params.author }}
+{{- with .Site.Params.linkedin }}{{ $author = merge $author (dict "url" .) }}{{ end }}
+{{- $post := dict
+  "@context" "https://schema.org"
+  "@type" "BlogPosting"
+  "headline" .Title
+  "description" (.Description | default .Site.Params.description)
+  "author" $author
+  "datePublished" (.Date.Format "2006-01-02")
+  "dateModified" (.Lastmod.Format "2006-01-02")
+  "inLanguage" (.Site.LanguageCode | default "pt-BR")
+  "mainEntityOfPage" .Permalink
+}}
+{{- with .Params.ogImage | default .Params.image }}{{ $post = merge $post (dict "image" (. | absURL)) }}{{ end }}
+<script type="application/ld+json">{{ $post | jsonify | safeJS }}</script>
+
+{{- if .Params.faq }}
+{{- /* As perguntas saem do próprio conteúdo: a seção começa no h2 com o id
+     `faqAnchor` (padrão "perguntas-frequentes") e vai até o próximo h2; cada
+     h3 é uma pergunta e o que vem até o h3 seguinte é a resposta. Assim o
+     texto do JSON-LD é sempre o mesmo que aparece na página. */}}
+{{- $anchor := .Params.faqAnchor | default "perguntas-frequentes" }}
+{{- $parts := split (string .Content) (printf `<h2 id="%s">` $anchor) }}
+{{- if gt (len $parts) 1 }}
+{{- $section := index (split (index $parts 1) "<h2") 0 }}
+{{- $questions := slice }}
+{{- range after 1 (split $section "<h3") }}
+{{- $pair := split . "</h3>" }}
+{{- $q := index $pair 0 | replaceRE `^[^>]*>` "" | plainify | htmlUnescape | strings.TrimSpace }}
+{{- $a := index $pair 1 | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace }}
+{{- $questions = $questions | append (dict "@type" "Question" "name" $q "acceptedAnswer" (dict "@type" "Answer" "text" $a)) }}
+{{- end }}
+{{- with $questions }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "FAQPage" "mainEntity" . | jsonify | safeJS }}</script>
+{{- end }}
+{{- else }}
+{{- warnf "%s: faq: true, mas não há <h2 id=%q> no conteúdo" .File.Path $anchor }}
+{{- end }}
+{{- end }}
