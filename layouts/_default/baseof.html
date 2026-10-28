@@ -8,24 +8,39 @@
   <title>
     {{- if .IsHome -}}
       {{ .Site.Title }}
+    {{- else if .Params.seoTitle -}}
+      {{ .Params.seoTitle }}
     {{- else -}}
       {{ .Title }} — {{ .Site.Params.author }}
     {{- end -}}
   </title>
 
   {{/* Meta description */}}
-  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  {{ $description := .Description | default .Site.Params.description }}
+  <meta name="description" content="{{ $description }}">
 
   {{/* Open Graph */}}
   <meta property="og:title"       content="{{ .Title }}">
-  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:description" content="{{ $description }}">
   <meta property="og:type"        content="{{ if .IsPage }}article{{ else }}website{{ end }}">
   <meta property="og:url"         content="{{ .Permalink }}">
-  {{ $ogImage := .Params.image | default .Site.Params.ogImage }}
+  {{/* ogImage na página tem prioridade: redes sociais não exibem SVG, que é o formato comum das capas. */}}
+  {{ $ogImage := .Params.ogImage | default .Params.image | default .Site.Params.ogImage }}
   {{ with $ogImage }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+
+  {{/* Twitter Card */}}
+  <meta name="twitter:card"        content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
+  <meta name="twitter:title"       content="{{ .Title }}">
+  <meta name="twitter:description" content="{{ $description }}">
+  {{ with $ogImage }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
 
   {{/* Canonical */}}
   <link rel="canonical" href="{{ .Permalink }}">
+
+  {{/* Outras versões da página (RSS, Markdown para LLMs etc.) */}}
+  {{ range .AlternativeOutputFormats }}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}">
+  {{ end }}
 
   {{/* Favicon */}}
   {{ with .Site.Params.favicon }}
