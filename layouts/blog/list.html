@@ -5,7 +5,7 @@
   <div class="container">
     <div class="blog-header__inner">
       <div>
-        <p class="page-label anim-1">{{ i18n "eyebrow_blog" }}</p>
+        <p class="page-label anim-1">{{ .Params.eyebrow | default (i18n "eyebrow_blog") }}</p>
         <h1 class="anim-2">{{ .Title | default (.Site.Params.blog_title | default "Blog") }}</h1>
       </div>
       {{ with .Description }}<p class="blog-header__sub anim-3">{{ . }}</p>{{ end }}
@@ -14,7 +14,17 @@
 </div>
 
 
-{{/* ── FILTERS ── */}}
+{{/* ── INTRO — corpo do _index.md da seção, se houver ── */}}
+{{ with .Content }}
+<div class="blog-intro">
+  <div class="container">
+    <div class="blog-intro__inner post-content">{{ . }}</div>
+  </div>
+</div>
+{{ end }}
+
+{{/* ── FILTERS — só no blog principal: as categorias são do site todo ── */}}
+{{ if eq .Section (.Site.Params.blogSection | default "blog") }}
 <div class="blog-filters">
   <div class="container">
     <div class="blog-filters__bar">
@@ -26,6 +36,7 @@
     </div>
   </div>
 </div>
+{{ end }}
 
 {{/* ── FEATURED POST ── */}}
 {{ $posts := .Pages }}

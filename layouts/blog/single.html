@@ -7,9 +7,17 @@
 {{/* ── HEADER ── */}}
 <div class="post-header">
   <div class="container">
+    {{/* O blog principal (params.blogSection) mantém o breadcrumb "Blog" com link
+         para params.blogURL. Outras seções com type "blog" apontam para a própria
+         seção e usam o título dela. */}}
+    {{ $isBlog := eq .Section (.Site.Params.blogSection | default "blog") }}
     <nav class="breadcrumb">
+      {{ if $isBlog }}
       <a href="{{ .Site.Params.blogURL | default "/blog/" }}">Blog</a>
-      {{ with .Params.categories }}
+      {{ else }}
+      <a href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.LinkTitle }}</a>
+      {{ end }}
+      {{ with and $isBlog .Params.categories }}
       <span class="breadcrumb__sep">/</span>
       <a href="{{ ($.Site.Params.blogURL | default "/blog/") | relURL }}categories/{{ index . 0 | urlize }}/">{{ index . 0 }}</a>
       {{ end }}
@@ -92,16 +100,24 @@
         </div>
         {{ end }}
 
-        {{/* CONTEXTUAL CTA */}}
+        {{/* CONTEXTUAL CTA — a seção pode esconder (sidebarCta: false) ou
+             sobrescrever os textos (sidebarCta: {question, title, body, url, link}). */}}
+        {{ $cta := .CurrentSection.Params.sidebarCta }}
+        {{ if ne $cta false }}
+        {{ $cta = cond (reflect.IsMap $cta) $cta dict }}
         <div class="sidebar-cta">
-          <div class="sidebar-cta__label">{{ i18n "blog_sidebar_cta_question" }}</div>
-          <h3>{{ .Site.Params.blog_sidebar_cta_title | default (i18n "blog_sidebar_cta_title") }}</h3>
-          <p>{{ .Site.Params.blog_sidebar_cta_body | default (i18n "blog_sidebar_cta_body") }}</p>
-          <a href="{{ .Site.Params.blog_sidebar_cta_url | default "/shopify/" }}">{{ i18n "blog_sidebar_cta_link" }}</a>
+          <div class="sidebar-cta__label">{{ $cta.question | default (i18n "blog_sidebar_cta_question") }}</div>
+          <h3>{{ $cta.title | default (.Site.Params.blog_sidebar_cta_title | default (i18n "blog_sidebar_cta_title")) }}</h3>
+          <p>{{ $cta.body | default (.Site.Params.blog_sidebar_cta_body | default (i18n "blog_sidebar_cta_body")) }}</p>
+          <a href="{{ $cta.url | default (.Site.Params.blog_sidebar_cta_url | default "/shopify/") }}">{{ $cta.link | default (i18n "blog_sidebar_cta_link") }}</a>
         </div>
+        {{ end }}
 
-        {{/* RELATED POSTS */}}
-        {{ $related := .Site.RegularPages.Related . | first 3 }}
+        {{/* RELATED POSTS — o blog principal busca no site todo, menos em outras
+             seções com type "blog"; essas seções só relacionam entre si. */}}
+        {{ $pool := where .Site.RegularPages "Section" .Section }}
+        {{ if $isBlog }}{{ $pool = union $pool (where .Site.RegularPages "Type" "ne" "blog") }}{{ end }}
+        {{ $related := $pool.Related . | first 3 }}
         {{ with $related }}
         <div class="sidebar-related">
           <div class="sidebar-related__label">{{ i18n "blog_related_label" }}</div>
