@@ -131,6 +131,34 @@ cascade:
 
 The `type: "blog"` cascade routes all posts to `layouts/blog/` without touching each file.
 
+### Secondary blog sections
+
+Any other section can reuse the blog layouts with the same `type: "blog"` cascade (e.g. a personal `content/notes/` next to the main blog). Only the section named in `blogSection` gets the main-blog behavior; the others are self-contained:
+
+- **Breadcrumb** links to the section itself, labeled with its title (the main blog keeps "Blog" → `blogURL`).
+- **Category filters** on the list page are shown only on the main blog.
+- **Related posts** come only from the same section. The main blog still pulls from the whole site, but skips other `type: "blog"` sections.
+
+The section's `_index.md` also accepts:
+
+```yaml
+---
+title: "Notes"
+eyebrow: "Off the clock"   # label above the list title (default: i18n "eyebrow_blog")
+sidebarCta: false          # hide the post sidebar CTA, or override its texts:
+# sidebarCta:
+#   question: "…"
+#   title: "…"
+#   body: "…"
+#   url: "/contact/"
+#   link: "Get in touch →"
+cascade:
+  type: "blog"
+---
+
+Intro text rendered between the header and the post list (works on any blog section).
+```
+
 ## Layout structure
 
 ```
